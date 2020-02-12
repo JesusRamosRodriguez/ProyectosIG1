@@ -63,14 +63,15 @@ public:
 	~Poligono();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
+//-------------------------------------------------------------------------
 
-
-
-
-
-
-
-
+class Sierpinski : public Abs_Entity 
+{
+public:
+	explicit Sierpinski(GLdouble rd, GLuint numP);
+	~Sierpinski();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
 //-------------------------------------------------------------------------
 
 #endif //_H_Entities_H_

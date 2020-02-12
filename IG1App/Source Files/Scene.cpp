@@ -15,19 +15,22 @@ void Scene::init()
     // Textures
 
     // Graphics objects (entities) of the scene
-	Poligono* triangulo_ = new Poligono(3.0, 100.0);		//1. Polígono regular (Dibujo de líneas) 
-	Poligono* circunferencia_ = new Poligono(360.0, 100.0);	//1. Polígono regular (Dibujo de líneas) 
+	Sierpinski* sierpinski_ = new Sierpinski(300, 10);
+	/*Poligono* triangulo_ = new Poligono(3.0, 100.0);		//1. Polígono regular (Dibujo de líneas) 
+	Poligono* circunferencia_ = new Poligono(360.0, 100.0);	//1. Polígono regular (Dibujo de líneas) */
 
 	//Colores
-	triangulo_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
-	circunferencia_->setColor(glm::dvec4(0.8, 0.2, 0.4, 1.0));
+	sierpinski_->setColor(glm::dvec4(0.24, 1.0, 0.24, 1.0));
+	/*triangulo_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
+	circunferencia_->setColor(glm::dvec4(0.8, 0.2, 0.4, 1.0));*/
 
 
 	gObjects.push_back(new EjesRGB(400.0));
+	gObjects.push_back(sierpinski_);
 
 	//Entities
-	gObjects.push_back(triangulo_);
-	gObjects.push_back(circunferencia_);
+	/*gObjects.push_back(triangulo_);
+	gObjects.push_back(circunferencia_);*/
 
 
 	

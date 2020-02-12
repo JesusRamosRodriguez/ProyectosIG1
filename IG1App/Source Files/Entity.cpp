@@ -81,3 +81,26 @@ void Poligono::render(glm::dmat4 const& modelViewMat) const
 		glColor3d(1.0, 1.0, 1.0);
 	}
 }
+
+Sierpinski::Sierpinski(GLdouble rd, GLuint numP)
+{
+	mMesh = Mesh::generaSierpinski(rd, numP);
+}
+
+Sierpinski::~Sierpinski()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void Sierpinski::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		glColor3d(mColor.r, mColor.g, mColor.b);
+		glPointSize(10);
+		mMesh->render();
+		glPointSize(1);
+		glColor3d(1.0, 1.0, 1.0);
+	}
+}

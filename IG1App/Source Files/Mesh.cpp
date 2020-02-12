@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #include "CheckML.h"
 #include <fstream>
+#include <iostream> // TEMP!
 using namespace std;
 using namespace glm;
 
@@ -99,4 +100,41 @@ Mesh* Mesh::generaPoligono(GLuint numL, GLdouble rd)
 	}
 
 	return mesh;
+}
+
+Mesh* Mesh::generaSierpinski(GLdouble rd, GLuint numP)
+{
+    Mesh* mesh = new Mesh();
+
+    mesh->mPrimitive = GL_POINTS;
+
+    mesh->mNumVertices = numP;
+    mesh->vVertices.reserve(mesh->mNumVertices);
+
+    double x = 0.0, y = 0.0;
+    double grados = 90.0;
+
+        //main Triangulo
+    Mesh* mainTriangulo = generaPoligono(3, rd);
+    for (size_t i = 0; i < 3; i++)
+    {
+        mesh->vVertices.emplace_back(mainTriangulo->vVertices[i]);
+    }
+    
+    int randomP = 0;
+    dvec3 Tk = mesh->vVertices[rand() % 3];
+    dvec3 newP = dvec3(0);
+    dvec3 prevP = dvec3(0);
+    for (size_t i = 3; i < numP; i++)
+    {
+        newP = dvec3(0);
+
+        mesh->vVertices.emplace_back(x, y, 0.0);
+
+        grados += 120;
+    }
+
+    //delete mainTriangulo; mainTriangulo = nullptr;
+
+    return mesh;
 }
