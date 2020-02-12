@@ -81,6 +81,7 @@ void Poligono::render(glm::dmat4 const& modelViewMat) const
 		glColor3d(1.0, 1.0, 1.0);
 	}
 }
+//-------------------------------------------------------------------------
 
 Sierpinski::Sierpinski(GLdouble rd, GLuint numP)
 {
@@ -98,9 +99,35 @@ void Sierpinski::render(glm::dmat4 const& modelViewMat) const
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
 		glColor3d(mColor.r, mColor.g, mColor.b);
-		glPointSize(10);
+		glPointSize(2);
 		mMesh->render();
 		glPointSize(1);
 		glColor3d(1.0, 1.0, 1.0);
 	}
 }
+//-------------------------------------------------------------------------
+
+TrianguloRGB::TrianguloRGB(GLdouble rd)
+{
+	mMesh = Mesh::generaTrianguloRGB(rd);
+
+}
+
+TrianguloRGB::~TrianguloRGB()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		glPolygonMode(GL_BACK, GL_LINE);
+
+		mMesh->render();
+		glColor3d(1.0, 1.0, 1.0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // por defecto 
+	}
+}
+//-------------------------------------------------------------------------

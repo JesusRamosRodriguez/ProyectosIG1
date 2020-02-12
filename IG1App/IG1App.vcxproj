@@ -92,17 +92,17 @@
     <Import Project="..\ProyectosIG.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Trabajo\Tercero\2ºCuatrimestre\Informática Gráfica\ProyectosIG1\IG1App\Header Files;$(IncludePath)</IncludePath>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Trabajo\Tercero\2ºCuatrimestre\Informática Gráfica\ProyectosIG1\IG1App\Header Files;$(SolutionDir)glm;$(SolutionDir)freeglut\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\hlocal\jesus\ProyectosIG1\IG1App\Header Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Trabajo\Tercero\2ºCuatrimestre\Informática Gráfica\ProyectosIG1\IG1App\Header Files;$(SolutionDir)glm;$(SolutionDir)freeglut\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\hlocal\jesus\ProyectosIG1\IG1App\Header Files;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\hlocal\jesus\ProyectosIG1\IG1App\Header Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Trabajo\Tercero\2ºCuatrimestre\Informática Gráfica\ProyectosIG1\IG1App\Header Files;$(SolutionDir)glm;$(SolutionDir)freeglut\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\hlocal\jesus\ProyectosIG1\IG1App\Header Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

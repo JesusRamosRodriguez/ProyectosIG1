@@ -125,16 +125,32 @@ Mesh* Mesh::generaSierpinski(GLdouble rd, GLuint numP)
     dvec3 Tk = mesh->vVertices[rand() % 3];
     dvec3 newP = dvec3(0);
     dvec3 prevP = dvec3(0);
+
     for (size_t i = 3; i < numP; i++)
     {
-        newP = dvec3(0);
+        prevP = mesh->vVertices[i - 1];
+        newP = dvec3((prevP.x + Tk.x)/2, (prevP.y + Tk.y)/2, 0.0);
 
-        mesh->vVertices.emplace_back(x, y, 0.0);
-
-        grados += 120;
+        mesh->vVertices.emplace_back(newP.x, newP.y, 0.0);
+     
+        Tk = mesh->vVertices[rand() % 3];
     }
 
-    //delete mainTriangulo; mainTriangulo = nullptr;
+    delete mainTriangulo; mainTriangulo = nullptr;
 
     return mesh;
+}
+
+Mesh* Mesh::generaTrianguloRGB(GLdouble rd)
+{
+ 
+   Mesh* mesh = generaPoligono(3, rd);
+   mesh->mPrimitive = GL_TRIANGLES;
+
+   mesh->vColors.reserve(3);
+   mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+   mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+   mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+
+   return mesh;
 }
