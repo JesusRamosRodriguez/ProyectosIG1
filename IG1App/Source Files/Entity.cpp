@@ -52,7 +52,7 @@ void Abs_Entity::setColor(glm::dvec4 c) { mColor = c; }
 
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
-
+ // _____   ____  _      ___________  ____  _   _  ____
  //|  __ \ / __ \| |    |_   _/ ____|/ __ \| \ | |/ __ \ 
  //| |__) | |  | | |      | || |  __| |  | |  \| | |  | |
  //|  ___/| |  | | |      | || | |_ | |  | | . ` | |  | |
@@ -127,7 +127,31 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
 
 		mMesh->render();
 		glColor3d(1.0, 1.0, 1.0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // por defecto 
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); 
+	}
+}
+//-------------------------------------------------------------------------
+
+RectanguloRGB::RectanguloRGB(GLdouble w, GLdouble h)
+{
+	mMesh = Mesh::generaRectanguloRGB(w,h);
+}
+
+RectanguloRGB::~RectanguloRGB()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		glPolygonMode(GL_BACK, GL_LINE);
+
+
+		mMesh->render();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 //-------------------------------------------------------------------------

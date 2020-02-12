@@ -15,11 +15,11 @@ public:
 
 	static Mesh* createRGBAxes(GLdouble l); // creates a new 3D-RGB axes mesh
 
-	static Mesh* generaPoligono(GLuint numL, GLdouble rd);	//1. Polígono regular (Dibujo de líneas)
-	static Mesh* generaSierpinski(GLdouble rd, GLuint numP);//2
-	static Mesh* generaTrianguloRGB(GLdouble rd);			//3
-	static Mesh* generaRectangulo(GLdouble rd);			//4
-
+	static Mesh* generaPoligono(GLuint numL, GLdouble rd);		//1 Polígono regular (Dibujo de líneas)
+	static Mesh* generaSierpinski(GLdouble rd, GLuint numP);	//2. Triangulo de Sierpinski
+	static Mesh* generaTrianguloRGB(GLdouble rd);				//3. TriánguloRGB
+	static Mesh* generaRectangulo(GLdouble w, GLdouble h);		//4. Rectángulo
+	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);	//4. RectánguloRGB
 
 	
 	Mesh() {};
