@@ -23,6 +23,8 @@ public:
 		
 	void init();
 
+	void update();
+
     void render(Camera const& cam) const;
 	
 protected:

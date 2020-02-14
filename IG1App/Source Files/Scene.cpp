@@ -16,10 +16,10 @@ void Scene::init()
 
     // Graphics objects (entities) of the scene
 	Poligono* triangulo_ = new Poligono(3.0, 100.0);				//1. Polígono regular (Dibujo de líneas) 
-	Poligono* circunferencia_ = new Poligono(360.0, 100.0);			//1. Polígono regular (Dibujo de líneas)
+	Poligono* circunferencia_ = new Poligono(360.0, 300.0);			//1. Polígono regular (Dibujo de líneas)
 	Sierpinski* sierpinski_ = new Sierpinski(300, 100000);			//2. Triangulo de Sierpinski
-	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(150);			//3. TriánguloRGB
-	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(200, 100);	//4. RectánguloRGB
+	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50);			//3. TriánguloRGB
+	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800, 600);	//4. RectánguloRGB
 
 	//Colores
 	sierpinski_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
@@ -27,7 +27,8 @@ void Scene::init()
 	circunferencia_->setColor(glm::dvec4(1.0, 0.0, 1.0, 1.0));
 
 	gObjects.push_back(new EjesRGB(400.0));
-
+	//Transforms
+	rectanguloRGB_->setModelMat(translate(rectanguloRGB_->modelMat(), dvec3(0.0, 0.0, -100.0)));
 	//Entities
 	gObjects.push_back(sierpinski_);
 	gObjects.push_back(triangulo_);
@@ -36,6 +37,16 @@ void Scene::init()
 	gObjects.push_back(rectanguloRGB_);
 
 	
+}
+//-------------------------------------------------------------------------
+
+void Scene::update()
+{
+	for (auto it = gObjects.begin(); it < gObjects.end(); it++)
+	{
+		if (*it != nullptr)
+			(*it)->update();
+	}
 }
 //-------------------------------------------------------------------------
 void Scene::free() 
@@ -50,7 +61,6 @@ void Scene::free()
 void Scene::setGL() 
 {
 	// OpenGL basic setting
-	glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
 	glEnable(GL_DEPTH_TEST);  // enable Depth test 
 
 }

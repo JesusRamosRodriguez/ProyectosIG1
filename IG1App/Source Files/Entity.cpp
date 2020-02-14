@@ -110,12 +110,14 @@ void Sierpinski::render(glm::dmat4 const& modelViewMat) const
 TrianguloRGB::TrianguloRGB(GLdouble rd)
 {
 	mMesh = Mesh::generaTrianguloRGB(rd);
-
+	angTr_ = 0.0;
+	angRt_ = 0.0;
 }
 
 TrianguloRGB::~TrianguloRGB()
 {
 	delete mMesh; mMesh = nullptr;
+	
 }
 
 void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
@@ -129,6 +131,14 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
 		glColor3d(1.0, 1.0, 1.0);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); 
 	}
+}
+
+void TrianguloRGB::update()
+{
+	mModelMat = translate(dmat4(1), dvec3(300.0 * cos(radians(angTr_)), 300.0 * sin(radians(angTr_)), 0));
+	mModelMat = rotate(mModelMat, radians(angRt_), dvec3(0, 0, 1));
+	angTr_ -= 1;
+	angRt_ += 1;
 }
 //-------------------------------------------------------------------------
 
