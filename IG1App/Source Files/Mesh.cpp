@@ -195,3 +195,42 @@ Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h)
     return mesh;
 }
 //-------------------------------------------------------------------------
+
+Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
+{
+    Mesh* mesh = new Mesh();
+    mesh->mPrimitive = GL_TRIANGLE_FAN;
+    mesh->mNumVertices = 2 * np + 2;
+    mesh->vVertices.reserve(mesh->mNumVertices);
+
+    double x = 0.0, y = 0.0, xi = 0.0, yi = 0.0;
+    double grados = 360.0;
+
+    mesh->vVertices.emplace_back(0.0, 0.0, 0.0);
+
+    for (size_t i = 1; i <= np; i++)
+    {       
+        
+        x = re * cos(radians(grados));
+        y = re * sin(radians(grados));
+
+        mesh->vVertices.emplace_back(x, y, h);
+
+        grados -= 360 / mesh->mNumVertices;
+
+
+        xi = re/2 * cos(radians(grados));
+        yi = re/2 * sin(radians(grados));
+
+
+        mesh->vVertices.emplace_back(xi, yi, h);
+        
+        grados -= 360 / mesh->mNumVertices;
+
+    }
+
+    mesh->vVertices.emplace_back(mesh->vVertices[0]);
+
+    return mesh;
+}
+//-------------------------------------------------------------------------

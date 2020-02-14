@@ -20,21 +20,25 @@ void Scene::init()
 	Sierpinski* sierpinski_ = new Sierpinski(300, 100000);			//2. Triangulo de Sierpinski
 	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50);			//3. TriánguloRGB
 	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800, 600);	//4. RectánguloRGB
-
+	Estrella3D* estrella3D_ = new Estrella3D(250, 6, -100);
 	//Colores
 	sierpinski_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
 	triangulo_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
 	circunferencia_->setColor(glm::dvec4(1.0, 0.0, 1.0, 1.0));
+	estrella3D_->setColor(glm::dvec4(1.0, 0.8, 1.0, 1.0));
+
 
 	gObjects.push_back(new EjesRGB(400.0));
 	//Transforms
 	rectanguloRGB_->setModelMat(translate(rectanguloRGB_->modelMat(), dvec3(0.0, 0.0, -100.0)));
 	//Entities
-	gObjects.push_back(sierpinski_);
+	/*gObjects.push_back(sierpinski_);
 	gObjects.push_back(triangulo_);
 	gObjects.push_back(circunferencia_);
 	gObjects.push_back(trianguloRGB_);
-	gObjects.push_back(rectanguloRGB_);
+	gObjects.push_back(rectanguloRGB_);*/
+	gObjects.push_back(estrella3D_);
+
 
 	
 }
