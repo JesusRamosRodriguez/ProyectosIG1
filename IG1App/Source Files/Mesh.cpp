@@ -204,7 +204,7 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
     mesh->vVertices.reserve(mesh->mNumVertices);
 
     double x = 0.0, y = 0.0, xi = 0.0, yi = 0.0;
-    double grados = 360.0;
+    double grados = 0.0 , incremento = 360 / (mesh->mNumVertices - 2);
 
     mesh->vVertices.emplace_back(0.0, 0.0, 0.0);
 
@@ -216,7 +216,7 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
 
         mesh->vVertices.emplace_back(x, y, h);
 
-        grados -= 360 / mesh->mNumVertices;
+        grados += incremento;
 
 
         xi = re/2 * cos(radians(grados));
@@ -224,12 +224,11 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
 
 
         mesh->vVertices.emplace_back(xi, yi, h);
-        
-        grados -= 360 / mesh->mNumVertices;
 
+        grados += incremento;
     }
 
-    mesh->vVertices.emplace_back(mesh->vVertices[0]);
+    mesh->vVertices.emplace_back(mesh->vVertices[1]);
 
     return mesh;
 }
