@@ -26,6 +26,8 @@ public:
 	void update();
 
     void render(Camera const& cam) const;
+
+	void setState(int id);
 	
 protected:
 	void free();
@@ -35,8 +37,10 @@ protected:
 	std::vector<Abs_Entity*> gObjects;  // Entities (graphic objects) of the scene
 
 private:
-	void scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
-	void scene3D();	//Enunciado P0. EJERCICIOS P1: [6-?)
+	int mId_ = 0;	//identificador para la escena
+
+	void scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)	//tecla: id = 0
+	void scene3D();	//Enunciado P0. EJERCICIOS P1: [6-?)	//tecla: id = 1		
 };
 //-------------------------------------------------------------------------
 

@@ -241,8 +241,8 @@ Mesh* Mesh::generaContCubo(GLdouble ld)
 	mesh->vVertices.emplace_back(-ld / 2, -ld / 2, -ld / 2);
 	//cerrar contorno
 	//v0, v1
-	mesh->vVertices.emplace_back(-ld / 2, ld / 2, ld / 2);
-	mesh->vVertices.emplace_back(-ld / 2, -ld / 2, ld / 2);
+	mesh->vVertices.emplace_back(mesh->vVertices[0]);
+	mesh->vVertices.emplace_back(mesh->vVertices[1]);
 
 	return mesh;
 }

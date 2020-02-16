@@ -7,18 +7,18 @@ using namespace glm;
 //-------------------------------------------------------------------------
 
 void Scene::init()
-{ 
+{
+	//clean all scene
+	free();
+	resetGL();
+	//****************
 	setGL();  // OpenGL settings
-
-	//*****************************
-   
-				//SCENES
-	// allocate memory and load resources
-	// Lights
-	// Textures
-
-	//scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
-	scene3D();
+	//****************
+	//open state
+	if (mId_ == 0)
+		scene2D();
+	else if (mId_ == 1)
+		scene3D();
 }
 //-------------------------------------------------------------------------
 
@@ -31,23 +31,24 @@ void Scene::update()
 	}
 }
 //-------------------------------------------------------------------------
-void Scene::free() 
+void Scene::free()
 { // release memory and resources   
 
 	for (Abs_Entity* el : gObjects)
 	{
 		delete el;  el = nullptr;
 	}
+	gObjects.clear();
 }
 //-------------------------------------------------------------------------
-void Scene::setGL() 
+void Scene::setGL()
 {
 	// OpenGL basic setting
 	glEnable(GL_DEPTH_TEST);  // enable Depth test 
 
 }
 //-------------------------------------------------------------------------
-void Scene::resetGL() 
+void Scene::resetGL()
 {
 	glClearColor(.0, .0, .0, .0);  // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);  // disable Depth test 	
@@ -55,14 +56,19 @@ void Scene::resetGL()
 
 //-------------------------------------------------------------------------
 
-void Scene::render(Camera const& cam) const 
+void Scene::render(Camera const& cam) const
 {
 	cam.upload();
 
 	for (Abs_Entity* el : gObjects)
 	{
-	  el->render(cam.viewMat());
+		el->render(cam.viewMat());
 	}
+}
+//-------------------------------------------------------------------------
+void Scene::setState(int id)
+{
+	mId_ = id;
 }
 //-------------------------------------------------------------------------
 void Scene::scene2D()
@@ -94,20 +100,24 @@ void Scene::scene2D()
 	gObjects.push_back(rectanguloRGB_);
 
 }
+//-------------------------------------------------------------------------
 void Scene::scene3D()
 {
+	// allocate memory and load resources
+	// Lights
+	// Textures
+
 	// Graphics objects (entities) of the scene
 	Estrella3D* estrella3D_ = new Estrella3D(150.0, 6.0, 160.0);	//6. Estrella 3D
 	Caja* caja_ = new Caja(200.0);
 
 	//Colores
-
-
+	
 	//Transforms
 
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
-	//gObjects.push_back(estrella3D_);
+	gObjects.push_back(estrella3D_);
 	gObjects.push_back(caja_);
 }
 //-------------------------------------------------------------------------
