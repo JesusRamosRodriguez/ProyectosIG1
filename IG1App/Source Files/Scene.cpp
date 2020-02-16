@@ -17,15 +17,11 @@ void Scene::init()
 	// Lights
 	// Textures
 
-	scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
+	//scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
+	scene3D();
 
 	
-	//Estrella3D* estrella3D_ = new Estrella3D(250, 6, 100);			//6. Estrella 3D
-	//gObjects.push_back(new EjesRGB(400.0));
-	//gObjects.push_back(estrella3D_);
 
-
-	
 }
 //-------------------------------------------------------------------------
 
@@ -100,5 +96,20 @@ void Scene::scene2D()
 	gObjects.push_back(trianguloRGB_);
 	gObjects.push_back(rectanguloRGB_);
 
+}
+void Scene::scene3D()
+{
+	// Graphics objects (entities) of the scene
+	Estrella3D* estrella3D_ = new Estrella3D(250, 6, 100);	//6. Estrella 3D
+
+
+	//Colores
+
+
+	//Transforms
+
+	//Entities
+	gObjects.push_back(new EjesRGB(400.0));
+	gObjects.push_back(estrella3D_);
 }
 //-------------------------------------------------------------------------

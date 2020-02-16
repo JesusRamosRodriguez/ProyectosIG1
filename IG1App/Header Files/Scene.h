@@ -36,6 +36,7 @@ protected:
 
 private:
 	void scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
+	void scene3D();	//Enunciado P0. EJERCICIOS P1: [6-?)
 };
 //-------------------------------------------------------------------------
 
