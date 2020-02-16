@@ -10,33 +10,19 @@ void Scene::init()
 { 
 	setGL();  // OpenGL settings
 
+	//*****************************
+   
+				//SCENES
 	// allocate memory and load resources
-    // Lights
-    // Textures
+	// Lights
+	// Textures
 
-    // Graphics objects (entities) of the scene
-	Poligono* triangulo_ = new Poligono(3.0, 100.0);				//1. Polígono regular (Dibujo de líneas) 
-	Poligono* circunferencia_ = new Poligono(360.0, 300.0);			//1. Polígono regular (Dibujo de líneas)
-	Sierpinski* sierpinski_ = new Sierpinski(300, 100000);			//2. Triangulo de Sierpinski
-	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50);				//3. TriánguloRGB
-	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800, 600);	//4. RectánguloRGB
-	Estrella3D* estrella3D_ = new Estrella3D(250, 6, 100);			//6. Estrella 3D
-	//Colores
-	sierpinski_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
-	triangulo_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
-	circunferencia_->setColor(glm::dvec4(1.0, 0.0, 1.0, 1.0));
+	scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
 
-
-	gObjects.push_back(new EjesRGB(400.0));
-	//Transforms
-	rectanguloRGB_->setModelMat(translate(rectanguloRGB_->modelMat(), dvec3(0.0, 0.0, -100.0)));
-	//Entities
-	/*gObjects.push_back(sierpinski_);
-	gObjects.push_back(triangulo_);
-	gObjects.push_back(circunferencia_);
-	gObjects.push_back(trianguloRGB_);
-	gObjects.push_back(rectanguloRGB_);*/
-	gObjects.push_back(estrella3D_);
+	
+	//Estrella3D* estrella3D_ = new Estrella3D(250, 6, 100);			//6. Estrella 3D
+	//gObjects.push_back(new EjesRGB(400.0));
+	//gObjects.push_back(estrella3D_);
 
 
 	
@@ -73,6 +59,7 @@ void Scene::resetGL()
 	glClearColor(.0, .0, .0, .0);  // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);  // disable Depth test 	
 }
+
 //-------------------------------------------------------------------------
 
 void Scene::render(Camera const& cam) const 
@@ -83,5 +70,35 @@ void Scene::render(Camera const& cam) const
 	{
 	  el->render(cam.viewMat());
 	}
+}
+//-------------------------------------------------------------------------
+void Scene::scene2D()
+{
+	// allocate memory and load resources
+	// Lights
+	// Textures
+
+	// Graphics objects (entities) of the scene
+	Poligono* triangulo_ = new Poligono(3.0, 100.0);				//1. Polígono regular (Dibujo de líneas) 
+	Poligono* circunferencia_ = new Poligono(360.0, 300.0);			//1. Polígono regular (Dibujo de líneas)
+	Sierpinski* sierpinski_ = new Sierpinski(300, 100000);			//2. Triangulo de Sierpinski
+	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50);				//3. TriánguloRGB
+	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800, 600);	//4-5. RectánguloRGB
+
+	//Colores
+	sierpinski_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
+	triangulo_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
+	circunferencia_->setColor(glm::dvec4(1.0, 0.0, 1.0, 1.0));
+
+	//Transforms
+	rectanguloRGB_->setModelMat(translate(rectanguloRGB_->modelMat(), dvec3(0.0, 0.0, -100.0)));
+	//Entities
+	gObjects.push_back(new EjesRGB(400.0));
+	gObjects.push_back(sierpinski_);
+	gObjects.push_back(triangulo_);
+	gObjects.push_back(circunferencia_);
+	gObjects.push_back(trianguloRGB_);
+	gObjects.push_back(rectanguloRGB_);
+
 }
 //-------------------------------------------------------------------------

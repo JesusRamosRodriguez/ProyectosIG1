@@ -33,6 +33,9 @@ protected:
 	void resetGL();
 
 	std::vector<Abs_Entity*> gObjects;  // Entities (graphic objects) of the scene
+
+private:
+	void scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
 };
 //-------------------------------------------------------------------------
 

@@ -67,15 +67,6 @@ Mesh * Mesh::createRGBAxes(GLdouble l)
 }
 //-------------------------------------------------------------------------
 
- /*                                 _____      _ _
-								 |  __ \    | (_)
-   __ _  ___ _ __   ___ _ __ __ _| |__) |__ | |_  __ _  ___  _ __   ___  ___
-  / _` |/ _ \ '_ \ / _ \ '__/ _` |  ___/ _ \| | |/ _` |/ _ \| '_ \ / _ \/ __|
- | (_| |  __/ | | |  __/ | | (_| | |  | (_) | | | (_| | (_) | | | | (_) \__ \
-  \__, |\___|_| |_|\___|_|  \__,_|_|   \___/|_|_|\__, |\___/|_| |_|\___/|___/
-   __/ |                                          __/ |
-  |___/                                          |___/                       */
-
 Mesh* Mesh::generaPoligono(GLuint numL, GLdouble rd)
 {
 	Mesh* mesh = new Mesh();
@@ -203,32 +194,25 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
     mesh->mNumVertices = 2 * np + 2;
     mesh->vVertices.reserve(mesh->mNumVertices);
 
-    double x = 0.0, y = 0.0, xi = 0.0, yi = 0.0;
-    double grados = 0.0 , incremento = 360 / (mesh->mNumVertices - 2);
+    GLdouble x = 0.0, y = 0.0, xi = 0.0, yi = 0.0;
+    GLdouble grados = 0.0 , incremento = 360 / (mesh->mNumVertices - 2);
 
-    mesh->vVertices.emplace_back(0.0, 0.0, 0.0);
-
+    mesh->vVertices.emplace_back(0.0, 0.0, 0.0); //abre con vO
     for (size_t i = 1; i <= np; i++)
     {       
-        
+		//radio exterior
         x = re * cos(radians(grados));
         y = re * sin(radians(grados));
-
         mesh->vVertices.emplace_back(x, y, h);
-
         grados += incremento;
 
-
+		//radio interior
         xi = re/2 * cos(radians(grados));
         yi = re/2 * sin(radians(grados));
-
-
         mesh->vVertices.emplace_back(xi, yi, h);
-
         grados += incremento;
     }
-
-    mesh->vVertices.emplace_back(mesh->vVertices[1]);
+    mesh->vVertices.emplace_back(mesh->vVertices[1]); //cierra con V1
 
     return mesh;
 }
