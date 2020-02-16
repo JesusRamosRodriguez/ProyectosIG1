@@ -217,3 +217,34 @@ Mesh* Mesh::generaEstrella3D(GLdouble re, GLdouble np, GLdouble h)
     return mesh;
 }
 //-------------------------------------------------------------------------
+
+Mesh* Mesh::generaContCubo(GLdouble ld)
+{
+	Mesh* mesh = new Mesh();
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;
+	
+	mesh->mNumVertices = 10; //8 del cubo + 2 para cerrar el contorno(v0,v1)
+	mesh->vVertices.reserve(mesh->mNumVertices);
+	
+	//posicion vertices en base a ld
+	//v0, v1
+	mesh->vVertices.emplace_back(-ld / 2, ld/2 , ld / 2);
+	mesh->vVertices.emplace_back(-ld / 2, -ld / 2, ld / 2);
+	//v2, v3
+	mesh->vVertices.emplace_back(ld / 2, ld / 2, ld / 2);
+	mesh->vVertices.emplace_back(ld / 2, -ld / 2, ld / 2);
+	//v4, v5
+	mesh->vVertices.emplace_back(ld / 2, ld / 2, -ld / 2);
+	mesh->vVertices.emplace_back(ld / 2, -ld / 2, -ld / 2);
+	//v6, v7
+	mesh->vVertices.emplace_back(-ld / 2, ld / 2, -ld / 2);
+	mesh->vVertices.emplace_back(-ld / 2, -ld / 2, -ld / 2);
+	//cerrar contorno
+	//v0, v1
+	mesh->vVertices.emplace_back(-ld / 2, ld / 2, ld / 2);
+	mesh->vVertices.emplace_back(-ld / 2, -ld / 2, ld / 2);
+
+	return mesh;
+}
+
+//-------------------------------------------------------------------------

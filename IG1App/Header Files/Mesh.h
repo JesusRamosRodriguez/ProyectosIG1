@@ -21,6 +21,8 @@ public:
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h);		//4. Rectángulo
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);	//5. RectánguloRGB
 	static Mesh* generaEstrella3D(GLdouble re, GLdouble np, GLdouble h); //6. Estrella 3D
+	static Mesh* generaContCubo(GLdouble ld);	//7. Caja
+
 	Mesh() {};
 	virtual ~Mesh() {};
 

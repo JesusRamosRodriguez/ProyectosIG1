@@ -19,9 +19,6 @@ void Scene::init()
 
 	//scene2D(); //Enunciado P0. EJERCICIOS P1: [1-6)
 	scene3D();
-
-	
-
 }
 //-------------------------------------------------------------------------
 
@@ -77,9 +74,9 @@ void Scene::scene2D()
 	// Graphics objects (entities) of the scene
 	Poligono* triangulo_ = new Poligono(3.0, 100.0);				//1. Polígono regular (Dibujo de líneas) 
 	Poligono* circunferencia_ = new Poligono(360.0, 300.0);			//1. Polígono regular (Dibujo de líneas)
-	Sierpinski* sierpinski_ = new Sierpinski(300, 100000);			//2. Triangulo de Sierpinski
-	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50);				//3. TriánguloRGB
-	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800, 600);	//4-5. RectánguloRGB
+	Sierpinski* sierpinski_ = new Sierpinski(300.0, 100000.0);			//2. Triangulo de Sierpinski
+	TrianguloRGB* trianguloRGB_ = new TrianguloRGB(50.0);				//3. TriánguloRGB
+	RectanguloRGB* rectanguloRGB_ = new RectanguloRGB(800.0, 600.0);	//4-5. RectánguloRGB
 
 	//Colores
 	sierpinski_->setColor(glm::dvec4(1.0, 1.0, 0.0, 1.0));
@@ -100,8 +97,8 @@ void Scene::scene2D()
 void Scene::scene3D()
 {
 	// Graphics objects (entities) of the scene
-	Estrella3D* estrella3D_ = new Estrella3D(250, 6, 100);	//6. Estrella 3D
-
+	Estrella3D* estrella3D_ = new Estrella3D(150.0, 6.0, 160.0);	//6. Estrella 3D
+	Caja* caja_ = new Caja(200.0);
 
 	//Colores
 
@@ -110,6 +107,7 @@ void Scene::scene3D()
 
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
-	gObjects.push_back(estrella3D_);
+	//gObjects.push_back(estrella3D_);
+	gObjects.push_back(caja_);
 }
 //-------------------------------------------------------------------------
