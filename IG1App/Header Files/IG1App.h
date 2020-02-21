@@ -21,6 +21,7 @@ class IG1App
 public:  
 	// static single instance (singleton pattern)
 	static IG1App s_ig1app;
+	static IG1App s_update; //	9. ANIMACION OPCIONAL  
 
 	IG1App(IG1App const & J) = delete; // no copy constructor
 	void operator =(IG1App const & J) = delete; // no copy assignment
@@ -34,6 +35,8 @@ public:
 
 	void run();    // the main event processing loop
 	void close();  // the application
+
+	
 	
 protected:
 
@@ -66,6 +69,12 @@ protected:
 	int mWinId = 0;	    // window's identifier
 	int mWinW = 800;    // window's width 
 	int mWinH = 600;    // window's height
+
+	GLuint mLastUpdateTime;
+	GLuint mFreshUpdateTime;
+	bool anim_;
+	void update();	//P0. 9. Animación opcional 
+	void setBoolAnimation();
 };
 //-------------------------------------------------------------------------
 

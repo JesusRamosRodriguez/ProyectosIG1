@@ -8,6 +8,7 @@ using namespace std;
 // static single instance (singleton pattern)
 
 IG1App IG1App::s_ig1app;  // default constructor (constructor with no parameters)
+IG1App IG1App::s_update;	//call update 
 
 //-------------------------------------------------------------------------
 
@@ -19,6 +20,24 @@ void IG1App::close()
 		mStop = true;   // main loop stopped  
 	}
 	free();
+}
+//P0. 9. ANIMACIÓN OPCIONAL 
+void IG1App::update()
+{
+
+	if (anim_) {
+		mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME);
+
+
+	}
+	//la diferencia entre el tiempo actual y el recogido en la variable = al tiempo que pasó
+	//la variable recoge el tiempo y luego se opera 
+	
+	
+}
+void IG1App::setBoolAnimation()
+{
+	anim_ = !anim_;
 }
 //-------------------------------------------------------------------------
 
@@ -43,6 +62,10 @@ void IG1App::init()
 	mCamera = new Camera(mViewPort);
 	mScene = new Scene;
 	
+
+	anim_ = false;
+	mLastUpdateTime = mFreshUpdateTime = 0;
+
 	mCamera->set2D();
 	mScene->init();
 }
@@ -72,6 +95,7 @@ void IG1App::iniWinOpenGL()
 	glutKeyboardFunc(s_key);
 	glutSpecialFunc(s_specialKey);
 	glutDisplayFunc(s_display);
+
 	
 	cout << glGetString(GL_VERSION) << '\n';
 	cout << glGetString(GL_VENDOR) << '\n';
