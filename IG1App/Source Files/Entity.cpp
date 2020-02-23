@@ -176,8 +176,8 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const
 
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		mTexture->bind(GL_REPLACE); //en la clase texture tenemos indicaciones en los metodos propios
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//mTexture->bind(GL_REPLACE); //en la clase texture tenemos indicaciones en los metodos propios
 
 		mMesh->render();
 
@@ -223,12 +223,40 @@ void Caja::render(glm::dmat4 const& modelViewMat) const
 
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
-		mTexture->bind(GL_REPLACE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//mTexture->bind(GL_REPLACE);
 		mMesh->render();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glLineWidth(1);
 		glColor3d(1.0, 1.0, 1.0);
 	}
+}
+
+//-------------------------------------------------------------------------
+Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+{
+	mMesh = Mesh::generaRectanguloTexCor(w, h, rw, rh);
+	//establecer la matriz de modelado en plano horizontal
+	mModelMat = rotate(dmat4(1), radians(-90.0), dvec3(1, 0, 0));
+	
+}
+
+Suelo::~Suelo()
+{
+	delete mMesh; mMesh = nullptr;
+	delete mTexture; mTexture = nullptr;
+}
+
+void Suelo::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		mTexture->bind(GL_REPLACE);
+
+		mMesh->render();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
 }

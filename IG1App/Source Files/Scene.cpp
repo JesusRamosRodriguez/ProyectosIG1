@@ -126,6 +126,7 @@ void Scene::scene3D()
 	// Graphics objects (entities) of the scene
 	Estrella3D* estrella3D_ = new Estrella3D(150.0, 6.0, 160.0);	//6. Estrella 3D
 	Caja* caja_ = new Caja(200.0);
+	Suelo* suelo_ = new Suelo(900.0, 700.0, 5, 5); //11. Suelo con textura
 
 	//Colores
 
@@ -137,11 +138,13 @@ void Scene::scene3D()
 	gTextures.push_back(tAux_); //0
 	tAux_->load("../Bmps/container.bmp"); //1
 	gTextures.push_back(tAux_); //1
-
+	tAux_->load("../Bmps/baldosaC.bmp"); //2
+	gTextures.push_back(tAux_);//2
 
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
 	caja_->setTexure(gTextures[1]);
+	suelo_->setTexure(gTextures[2]);
 	
 	//Transforms
 	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(0.0, 250.0, 0.0)));
@@ -151,5 +154,6 @@ void Scene::scene3D()
 	gObjects.push_back(new EjesRGB(400.0));
 	gObjects.push_back(estrella3D_);
 	gObjects.push_back(caja_);
+	gObjects.push_back(suelo_);
 }
 //-------------------------------------------------------------------------
