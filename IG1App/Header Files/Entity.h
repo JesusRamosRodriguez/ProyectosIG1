@@ -6,13 +6,14 @@
 #include <glm.hpp>
 
 #include "Mesh.h"
+#include "Texture.h"
 
 //-------------------------------------------------------------------------
 
 class Abs_Entity  // abstract class
 {
 public:
-	Abs_Entity(): mModelMat(1.0), mColor(1) {};  // 4x4 identity matrix
+	Abs_Entity(): mModelMat(1.0), mColor(1), mTexture(nullptr){};  // 4x4 identity matrix
 	virtual ~Abs_Entity() {};
 
 	Abs_Entity(const Abs_Entity& e) = delete;  // no copy constructor
@@ -28,6 +29,7 @@ public:
 
 	//aux methods
 	void setColor(glm::dvec4 c);
+	void setTexure(Texture* t);
 	
 protected:
 
@@ -39,6 +41,9 @@ protected:
 
 	//ATRIBUTOS AUXILIARES
 	glm::dvec4 mColor;
+
+	//texturas
+	Texture* mTexture;
 };
 //-------------------------------------------------------------------------
 
@@ -97,6 +102,10 @@ public:
 	explicit Estrella3D(GLdouble re, GLdouble np, GLdouble h);
 	~Estrella3D();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+
+private:
+	GLdouble grdY_, grdZ_;
 };
 //-------------------------------------------------------------------------
 class Caja : public Abs_Entity
@@ -107,6 +116,17 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 //-------------------------------------------------------------------------
+
+class Suelo : public Abs_Entity
+{
+public:
+	explicit Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~Suelo();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+//-------------------------------------------------------------------------
+
+
 
 
 #endif //_H_Entities_H_

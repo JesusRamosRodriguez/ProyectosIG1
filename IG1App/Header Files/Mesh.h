@@ -20,8 +20,13 @@ public:
 	static Mesh* generaTrianguloRGB(GLdouble rd);				//3. TriánguloRGB
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h);		//4. Rectángulo
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h);	//5. RectánguloRGB
-	static Mesh* generaEstrella3D(GLdouble re, GLdouble np, GLdouble h); //6. Estrella 3D
+	static Mesh* generaEstrella3D(GLdouble re, GLdouble np, GLdouble h); //6. Estrella 3D 9.renderizado doble
 	static Mesh* generaContCubo(GLdouble ld);	//7. Caja
+
+	//P1 TEXTURAS
+	static Mesh* generaEstrellaTexCor(GLdouble re, GLuint np, GLdouble h); //10.
+	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+
 
 	Mesh() {};
 	virtual ~Mesh() {};
@@ -42,6 +47,8 @@ protected:
 	std::vector<glm::dvec3> vVertices;  // vertex array
 	std::vector<glm::dvec4> vColors;    // color array
 	virtual void draw() const;
+
+	std::vector<glm::dvec2> vTexCoords; //P1. texturas
 };
 //-------------------------------------------------------------------------
 

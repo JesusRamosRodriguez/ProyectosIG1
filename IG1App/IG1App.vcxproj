@@ -24,7 +24,9 @@
     <ClInclude Include="Header Files\Entity.h" />
     <ClInclude Include="Header Files\IG1App.h" />
     <ClInclude Include="Header Files\Mesh.h" />
+    <ClInclude Include="Header Files\Pixmap32RGBA.h" />
     <ClInclude Include="Header Files\Scene.h" />
+    <ClInclude Include="Header Files\Texture.h" />
     <ClInclude Include="Header Files\Viewport.h" />
   </ItemGroup>
   <ItemGroup>
@@ -33,7 +35,9 @@
     <ClCompile Include="Source Files\IG1App.cpp" />
     <ClCompile Include="Source Files\main.cpp" />
     <ClCompile Include="Source Files\Mesh.cpp" />
+    <ClCompile Include="Source Files\Pixmap32RGBA.cpp" />
     <ClCompile Include="Source Files\Scene.cpp" />
+    <ClCompile Include="Source Files\Texture.cpp" />
     <ClCompile Include="Source Files\Viewport.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

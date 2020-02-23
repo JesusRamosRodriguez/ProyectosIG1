@@ -24,6 +24,14 @@ void Mesh::render() const
       glColorPointer(4, GL_DOUBLE, 0, vColors.data());  // components number (rgba=4), type of each component, stride, pointer  
     }
 
+    //vector coord de textura
+    if (vTexCoords.size() > 0) {
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTexCoordPointer(2, GL_DOUBLE, 0, vTexCoords.data());
+    }
+   
+
+
 	draw();
 
     glDisableClientState(GL_COLOR_ARRAY);
@@ -247,4 +255,31 @@ Mesh* Mesh::generaContCubo(GLdouble ld)
 	return mesh;
 }
 
+
 //-------------------------------------------------------------------------
+
+//TEXTURAS
+
+Mesh* Mesh::generaEstrellaTexCor(GLdouble re, GLuint np, GLdouble h)
+{
+	Mesh* mesh = generaEstrella3D(re, np, h);
+
+
+
+
+	return mesh;
+}
+//-------------------------------------------------------------------------
+
+Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+{
+	Mesh* mesh = generaRectangulo(w, h);
+
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+	mesh->vTexCoords.emplace_back(0,rw);
+	mesh->vTexCoords.emplace_back(0,0);
+	mesh->vTexCoords.emplace_back(rw,rh);
+	mesh->vTexCoords.emplace_back(rh,0);
+	return mesh;
+}
+
