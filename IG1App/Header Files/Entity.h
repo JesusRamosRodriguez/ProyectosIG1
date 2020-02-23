@@ -43,7 +43,7 @@ protected:
 	glm::dvec4 mColor;
 
 	//texturas
-	Texture* mTexture;
+	Texture* mTexture; //se elimina en la clase Scene.free() [vector punteros a texturas] No eliminar en las destructuras de entity
 };
 //-------------------------------------------------------------------------
 
@@ -116,6 +116,15 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 //-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+/* _______ ________   _________ _    _ _____             _____  
+ |__   __|  ____\ \ / /__   __| |  | |  __ \     /\    / ____| 
+    | |  | |__   \ V /   | |  | |  | | |__) |   /  \  | (___   
+    | |  |  __|   > <    | |  | |  | |  _  /   / /\ \  \___ \  
+    | |  | |____ / . \   | |  | |__| | | \ \  / ____ \ ____) | 
+    |_|  |______/_/ \_\  |_|   \____/|_|  \_\/_/    \_\_____/*/ 
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 
 class Suelo : public Abs_Entity
 {
@@ -125,7 +134,13 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 //-------------------------------------------------------------------------
-
+class CajaConTextura : public Abs_Entity
+{
+public:
+	explicit CajaConTextura(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~CajaConTextura();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
 
 
 
