@@ -30,12 +30,12 @@ void Mesh::render() const
         glTexCoordPointer(2, GL_DOUBLE, 0, vTexCoords.data());
     }
    
-
-
 	draw();
 
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
   }
 }
 //-------------------------------------------------------------------------
@@ -257,8 +257,15 @@ Mesh* Mesh::generaContCubo(GLdouble ld)
 
 
 //-------------------------------------------------------------------------
-
-//TEXTURAS
+//-------------------------------------------------------------------------
+/* _______ ________   _________ _    _ _____             _____
+ |__   __|  ____\ \ / /__   __| |  | |  __ \     /\    / ____|
+	| |  | |__   \ V /   | |  | |  | | |__) |   /  \  | (___
+	| |  |  __|   > <    | |  | |  | |  _  /   / /\ \  \___ \
+	| |  | |____ / . \   | |  | |__| | | \ \  / ____ \ ____) |
+	|_|  |______/_/ \_\  |_|   \____/|_|  \_\/_/    \_\_____/*/
+	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
 
 Mesh* Mesh::generaEstrellaTexCor(GLdouble re, GLuint np, GLdouble h)
 {
@@ -281,5 +288,14 @@ Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 	mesh->vTexCoords.emplace_back(rw,rh);
 	mesh->vTexCoords.emplace_back(rh,0);
 	return mesh;
+}
+
+//-------------------------------------------------------------------------
+
+Mesh* Mesh::generaCajaTexCor(GLdouble nl)
+{
+
+
+	return nullptr;
 }
 

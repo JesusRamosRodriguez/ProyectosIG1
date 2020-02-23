@@ -31,10 +31,10 @@ void Scene::update()
 void Scene::free()
 { // release memory and resources   
 
-	//eliminamos texturas y limpiamos vector
-	for (Texture* el : gTextures)
+		//eliminamos texturas y limpiamos vector
+	for (Texture* t : gTextures)
 	{
-		delete el;  el = nullptr;
+		delete t;  t = nullptr;
 	}
 	gTextures.clear();
 
@@ -44,7 +44,6 @@ void Scene::free()
 		delete el;  el = nullptr;
 	}
 	gObjects.clear();
-
 
 }
 //-------------------------------------------------------------------------
@@ -132,18 +131,18 @@ void Scene::scene3D()
 
 	// Textures
 	//carga texturas
-	Texture* tAux_= new Texture();
-
-	tAux_->load("../Bmps/baldosaP.bmp"); //0
-	gTextures.push_back(tAux_); //0
-	tAux_->load("../Bmps/container.bmp"); //1
-	gTextures.push_back(tAux_); //1
-	tAux_->load("../Bmps/baldosaC.bmp"); //2
-	gTextures.push_back(tAux_);//2
+	
+	//0: triangulo; 1: caja (exterior); 2: suelo adoquinado; 
+	
+	gTextures.push_back(new Texture()); //0
+	gTextures[0]->load("../Bmps/baldosaP.bmp"); //0
+	gTextures.push_back(new Texture()); //1
+	gTextures[1]->load("../Bmps/container.bmp"); //1
+	gTextures.push_back(new Texture());//2
+	gTextures[2]->load("../Bmps/baldosaC.bmp"); //2
+	
 
 	//modificamos el atributo del objeto
-	estrella3D_->setTexure(gTextures[0]);
-	caja_->setTexure(gTextures[1]);
 	suelo_->setTexure(gTextures[2]);
 	
 	//Transforms
