@@ -24,6 +24,14 @@ void Mesh::render() const
       glColorPointer(4, GL_DOUBLE, 0, vColors.data());  // components number (rgba=4), type of each component, stride, pointer  
     }
 
+    //vector coord de textura
+    if (vTexCoords.size() > 0) {
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTexCoordPointer(2, GL_DOUBLE, 0, vTexCoords.data());
+    }
+   
+
+
 	draw();
 
     glDisableClientState(GL_COLOR_ARRAY);

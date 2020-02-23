@@ -37,27 +37,19 @@ void EjesRGB::render(dmat4 const& modelViewMat) const
 		glLineWidth(1);
 	}
 }
-//-------------------------------------------------------------------------
- //				  | |          | |                             
- // _ __ ___   ___| |_ ___   __| | ___  ___    __ _ _   ___  __
- //| '_ ` _ \ / _ \ __/ _ \ / _` |/ _ \/ __|  / _` | | | \ \/ /
- //| | | | | |  __/ || (_) | (_| | (_) \__ \ | (_| | |_| |>  < 
- //|_| |_| |_|\___|\__\___/ \__,_|\___/|___/  \__,_|\__,_/_/\_\
 
 void Abs_Entity::setColor(glm::dvec4 c) { mColor = c; }
+
+void Abs_Entity::setTexure(Texture* t)
+{
+	mTexture = t;
+}
 
 		//*****************************//
 
 
 
 //-------------------------------------------------------------------------
-//-------------------------------------------------------------------------
- // _____   ____  _      ___________  ____  _   _  ____
- //|  __ \ / __ \| |    |_   _/ ____|/ __ \| \ | |/ __ \ 
- //| |__) | |  | | |      | || |  __| |  | |  \| | |  | |
- //|  ___/| |  | | |      | || | |_ | |  | | . ` | |  | |
- //| |    | |__| | |____ _| || |__| | |__| | |\  | |__| |
- //|_|     \____/|______|_____\_____|\____/|_| \_|\____/
 
 Poligono::Poligono(GLdouble numL, GLdouble rd)
 {
@@ -168,6 +160,7 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const
 Estrella3D::Estrella3D(GLdouble re, GLdouble np, GLdouble h)
 {
 	mMesh = Mesh::generaEstrella3D(re, np, h);
+	grdY_ = grdZ_ = 0.0;
 }
 
 Estrella3D::~Estrella3D()
@@ -183,13 +176,32 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const
 
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		mTexture->bind(GL_REPLACE); //en la clase texture tenemos indicaciones en los metodos propios
+
 		mMesh->render();
 
+		//rotacion de la estrella sobre su eje
+		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
+		upload(aMat);
+
+		mMesh->render();
+
+		mTexture->unbind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glLineWidth(1);
 		glColor3d(1.0, 1.0, 1.0);
 	}
+}
+void Estrella3D::update()
+{
+	//siempre se empieza la transformacion desde la matriz identidad, que es donde se aplica la operacion
+	mModelMat = translate(dmat4(1), dvec3(0, 250, 0));
+	//una vez actualizado mModelMat no hace falta más pasar por parametro la matriz identidad
+	mModelMat = rotate(mModelMat, radians(grdY_), dvec3(0, 1, 0));
+	mModelMat = rotate(mModelMat, radians(grdZ_), dvec3(0, 0, 1));
+	grdY_ += 1;
+	grdZ_ += 1;
 }
 //-------------------------------------------------------------------------
 
@@ -211,7 +223,8 @@ void Caja::render(glm::dmat4 const& modelViewMat) const
 
 		glColor3d(mColor.r, mColor.g, mColor.b);
 		glLineWidth(2);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
+		mTexture->bind(GL_REPLACE);
 		mMesh->render();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
