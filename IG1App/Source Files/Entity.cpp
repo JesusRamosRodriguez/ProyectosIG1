@@ -293,13 +293,24 @@ void CajaConTextura::render(glm::dmat4 const& modelViewMat) const
 
 		mTexture->bind(GL_REPLACE);
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT / GL_BACK);
+		glCullFace(GL_BACK);
 
 		mMesh->render();
 
 		mTexture->unbind();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
+		iTexture_->bind(GL_REPLACE);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+
+		mMesh->render();
+
+		iTexture_->unbind();
+
 		glDisable(GL_CULL_FACE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		
 	}
 
 }

@@ -151,13 +151,13 @@ void Scene::scene3D()
 	
 
 	//modificamos el atributo del objeto
-	cajaT_->setTexure(gTextures[2]);
+	cajaT_->setTexure(gTextures[1]);
+	cajaT_->setIntTex(gTextures[2]);
 	suelo_->setTexure(gTextures[3]);
 	
 	
 	//Transforms
 	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(0.0, estrH_, 0.0)));
-	//suelo_->setModelMat(rotate(suelo_->modelMat(), radians(-90.0), dvec3(1, 0, 0)));
 	suelo_->setModelMat(translate(suelo_->modelMat(), dvec3(0.0, 0.0, -100.0)));
 
 
