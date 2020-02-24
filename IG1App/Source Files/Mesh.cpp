@@ -292,10 +292,10 @@ Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 
 //-------------------------------------------------------------------------
 
-Mesh* Mesh::generaCajaTexCor(GLdouble nl)
+Mesh* Mesh::generaCuboTexCor(GLdouble nl)
 {
+	Mesh* mesh = new Mesh();
 
-
-	return nullptr;
+	return mesh;
 }
 

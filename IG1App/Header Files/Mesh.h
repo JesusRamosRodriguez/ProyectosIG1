@@ -26,7 +26,7 @@ public:
 	//P1 TEXTURAS
 	static Mesh* generaEstrellaTexCor(GLdouble re, GLuint np, GLdouble h); //10.
 	static Mesh* generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);//11.suelo con textura
-	static Mesh* generaCajaTexCor(GLdouble nl); //14. caja con textura
+	static Mesh* generaCuboTexCor(GLdouble nl); //14. caja con textura
 
 
 	Mesh() {};
