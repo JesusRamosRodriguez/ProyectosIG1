@@ -194,12 +194,16 @@ void Estrella3D::render(glm::dmat4 const& modelViewMat) const
 void Estrella3D::update()
 {
 	//siempre se empieza la transformacion desde la matriz identidad, que es donde se aplica la operacion
-	mModelMat = translate(dmat4(1), dvec3(0, 250, 0));
+	mModelMat = translate(dmat4(1), dvec3(0, h_, 0));
 	//una vez actualizado mModelMat no hace falta más pasar por parametro la matriz identidad
 	mModelMat = rotate(mModelMat, radians(grdY_), dvec3(0, 1, 0));
 	mModelMat = rotate(mModelMat, radians(grdZ_), dvec3(0, 0, 1));
 	grdY_ += 1;
 	grdZ_ += 1;
+}
+void Estrella3D::setH(GLdouble h)
+{
+	h_ = h;
 }
 //-------------------------------------------------------------------------
 
@@ -246,7 +250,6 @@ Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 	
 	//establecer la matriz de modelado en plano horizontal
 	mModelMat = rotate(dmat4(1), radians(-90.0), dvec3(1, 0, 0));
-	
 }
 
 Suelo::~Suelo()
@@ -271,14 +274,38 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const
 }
 
 //-------------------------------------------------------------------------
-CajaConTextura::CajaConTextura(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+CajaConTextura::CajaConTextura(GLdouble ld)
 {
+	mMesh = Mesh::generaCuboTexCor(ld);
+	iTexture_ = nullptr;
 }
 
 CajaConTextura::~CajaConTextura()
 {
+	delete mMesh;  mMesh = nullptr;
 }
 
 void CajaConTextura::render(glm::dmat4 const& modelViewMat) const
 {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+
+		mTexture->bind(GL_REPLACE);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT / GL_BACK);
+
+		mMesh->render();
+
+		mTexture->unbind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glDisable(GL_CULL_FACE);
+	}
+
 }
+
+void CajaConTextura::setIntTex(Texture* t)
+{
+	iTexture_ = t;
+}
+//-------------------------------------------------------------------------

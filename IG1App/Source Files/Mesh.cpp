@@ -294,7 +294,20 @@ Mesh* Mesh::generaRectanguloTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 
 Mesh* Mesh::generaCuboTexCor(GLdouble nl)
 {
-	Mesh* mesh = new Mesh();
+	Mesh* mesh = generaContCubo(nl);
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+	mesh->vTexCoords.emplace_back(2, 1);
+	mesh->vTexCoords.emplace_back(2, 0);
+	mesh->vTexCoords.emplace_back(3, 1);
+	mesh->vTexCoords.emplace_back(3, 0);
+
+	mesh->vTexCoords.emplace_back(4, 1);
+	mesh->vTexCoords.emplace_back(4, 0);
 
 	return mesh;
 }

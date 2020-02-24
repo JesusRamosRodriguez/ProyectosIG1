@@ -104,8 +104,11 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
 
+	void setH(GLdouble h);
+
 private:
 	GLdouble grdY_, grdZ_;
+	GLdouble h_;
 };
 //-------------------------------------------------------------------------
 class Caja : public Abs_Entity
@@ -137,9 +140,16 @@ public:
 class CajaConTextura : public Abs_Entity
 {
 public:
-	explicit CajaConTextura(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	explicit CajaConTextura(GLdouble ld);
 	~CajaConTextura();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+
+	//metodo modifica la textura interior
+	void setIntTex(Texture* t);
+
+private:
+	//segunda textura: interior caja
+	Texture* iTexture_;
 };
 
 
