@@ -8,26 +8,26 @@ using namespace glm;
 //-------------------------------------------------------------------------
 
 void Abs_Entity::upload(dmat4 const& modelViewMat) const
-{ 
+{
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixd(value_ptr(modelViewMat));  // transfers modelView matrix to the GPU
 }
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
 
-EjesRGB::EjesRGB(GLdouble l): Abs_Entity()
+EjesRGB::EjesRGB(GLdouble l) : Abs_Entity()
 {
-  mMesh = Mesh::createRGBAxes(l);
+	mMesh = Mesh::createRGBAxes(l);
 }
 //-------------------------------------------------------------------------
 
-EjesRGB::~EjesRGB() 
-{ 
-	delete mMesh; mMesh = nullptr; 
+EjesRGB::~EjesRGB()
+{
+	delete mMesh; mMesh = nullptr;
 };
 //-------------------------------------------------------------------------
 
-void EjesRGB::render(dmat4 const& modelViewMat) const 
+void EjesRGB::render(dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
@@ -45,7 +45,7 @@ void Abs_Entity::setTexure(Texture* t)
 	mTexture = t;
 }
 
-		//*****************************//
+//*****************************//
 
 
 
@@ -109,7 +109,7 @@ TrianguloRGB::TrianguloRGB(GLdouble rd)
 TrianguloRGB::~TrianguloRGB()
 {
 	delete mMesh; mMesh = nullptr;
-	
+
 }
 
 void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
@@ -121,7 +121,7 @@ void TrianguloRGB::render(glm::dmat4 const& modelViewMat) const
 
 		mMesh->render();
 		glColor3d(1.0, 1.0, 1.0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); 
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 
@@ -136,7 +136,7 @@ void TrianguloRGB::update()
 
 RectanguloRGB::RectanguloRGB(GLdouble w, GLdouble h)
 {
-	mMesh = Mesh::generaRectanguloRGB(w,h);
+	mMesh = Mesh::generaRectanguloRGB(w, h);
 }
 
 RectanguloRGB::~RectanguloRGB()
@@ -242,12 +242,12 @@ void Caja::render(glm::dmat4 const& modelViewMat) const
 	| |  |  __|   > <    | |  | |  | |  _  /   / /\ \  \___ \
 	| |  | |____ / . \   | |  | |__| | | \ \  / ____ \ ____) |
 	|_|  |______/_/ \_\  |_|   \____/|_|  \_\/_/    \_\_____/*/
-//-------------------------------------------------------------------------
-//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
 Suelo::Suelo(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 {
 	mMesh = Mesh::generaRectanguloTexCor(w, h, rw, rh);
-	
+
 	//establecer la matriz de modelado en plano horizontal
 	mModelMat = rotate(dmat4(1), radians(-90.0), dvec3(1, 0, 0));
 }
@@ -270,7 +270,6 @@ void Suelo::render(glm::dmat4 const& modelViewMat) const
 		mTexture->unbind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-
 }
 
 //-------------------------------------------------------------------------
@@ -310,7 +309,7 @@ void CajaConTextura::render(glm::dmat4 const& modelViewMat) const
 
 		glDisable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		
+
 	}
 
 }
@@ -334,7 +333,7 @@ EstrellaConTextura::~EstrellaConTextura()
 
 void EstrellaConTextura::render(glm::dmat4 const& modelViewMat) const
 {
-	
+
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
@@ -370,3 +369,31 @@ void EstrellaConTextura::setH(GLdouble h)
 	h_ = h;
 }
 //-------------------------------------------------------------------------
+
+Foto::Foto(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+{
+	mMesh = Mesh::generaRectanguloTexCor(w, h, rw, rh);
+
+	//establecer la matriz de modelado en plano horizontal
+	mModelMat = rotate(dmat4(1), radians(-90.0), dvec3(1, 0, 0));
+}
+
+Foto::~Foto()
+{
+		delete mMesh; mMesh = nullptr;
+}
+
+void Foto::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+
+		mTexture->bind(GL_REPLACE);
+
+		mMesh->render();
+
+		mTexture->unbind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+}

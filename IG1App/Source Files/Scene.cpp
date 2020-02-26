@@ -132,6 +132,8 @@ void Scene::scene3D()
 	// ----		Elementos de la escena CON Textura	 ----
 	CajaConTextura* cajaT_ = new CajaConTextura(200.0);
 	Suelo* suelo_ = new Suelo(700, 450.0, 5, 5); //11. Suelo con textura
+	Suelo* caja_fondo_ = new Suelo(200.0, 200.0, 1, 1);		 //13 fondo de la caja: parte opcional
+	Foto* foto_ = new Foto(200.0, 150.0, 1, 1); //15. foto con renderizado del buffer como textura
 	
 
 	//Colores
@@ -155,11 +157,14 @@ void Scene::scene3D()
 	cajaT_->setTexure(gTextures[1]);
 	cajaT_->setIntTex(gTextures[2]);
 	suelo_->setTexure(gTextures[3]);
-	
+	caja_fondo_->setTexure(gTextures[1]);
+	foto_->setTexure(gTextures[0]);
 	
 	//Transforms
 	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(0.0, estrH_, 0.0)));
 	suelo_->setModelMat(translate(suelo_->modelMat(), dvec3(0.0, 0.0, -100.0)));
+	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(0.0, 0.0, -98)));
+	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -98)));
 
 
 	//Entities
@@ -167,5 +172,7 @@ void Scene::scene3D()
 	gObjects.push_back(estrella3D_);
 	gObjects.push_back(cajaT_);
 	gObjects.push_back(suelo_);
+	gObjects.push_back(caja_fondo_);
+	gObjects.push_back(foto_);
 }
 //-------------------------------------------------------------------------

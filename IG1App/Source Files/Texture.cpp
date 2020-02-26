@@ -61,4 +61,9 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wp);  
   glBindTexture(GL_TEXTURE_2D, 0); 
 }
+void Texture::loadColorBuffer()
+{
+
+	//glCopyTexImage2D(GL_TEXTURE_2D, level(0), internalFormat, xLeft, yBottom, width, height, border(0));
+}
 //-------------------------------------------------------------------------

@@ -13,7 +13,7 @@
 class Abs_Entity  // abstract class
 {
 public:
-	Abs_Entity(): mModelMat(1.0), mColor(1), mTexture(nullptr){};  // 4x4 identity matrix
+	Abs_Entity() : mModelMat(1.0), mColor(1), mTexture(nullptr) {};  // 4x4 identity matrix
 	virtual ~Abs_Entity() {};
 
 	Abs_Entity(const Abs_Entity& e) = delete;  // no copy constructor
@@ -30,14 +30,14 @@ public:
 	//aux methods
 	void setColor(glm::dvec4 c);
 	void setTexure(Texture* t);
-	
+
 protected:
 
 	Mesh* mMesh = nullptr;   // the mesh
 	glm::dmat4 mModelMat;    // modeling matrix
-	
+
 	// transfers modelViewMat to the GPU
-	virtual void upload(glm::dmat4 const& mModelViewMat) const; 
+	virtual void upload(glm::dmat4 const& mModelViewMat) const;
 
 	//ATRIBUTOS AUXILIARES
 	glm::dvec4 mColor;
@@ -47,7 +47,7 @@ protected:
 };
 //-------------------------------------------------------------------------
 
-class EjesRGB : public Abs_Entity 
+class EjesRGB : public Abs_Entity
 {
 public:
 	explicit EjesRGB(GLdouble l);
@@ -66,7 +66,7 @@ public:
 };
 //-------------------------------------------------------------------------
 
-class Sierpinski : public Abs_Entity 
+class Sierpinski : public Abs_Entity
 {
 public:
 	explicit Sierpinski(GLdouble rd, GLuint numP);
@@ -120,14 +120,14 @@ public:
 };
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
-/* _______ ________   _________ _    _ _____             _____  
- |__   __|  ____\ \ / /__   __| |  | |  __ \     /\    / ____| 
-    | |  | |__   \ V /   | |  | |  | | |__) |   /  \  | (___   
-    | |  |  __|   > <    | |  | |  | |  _  /   / /\ \  \___ \  
-    | |  | |____ / . \   | |  | |__| | | \ \  / ____ \ ____) | 
-    |_|  |______/_/ \_\  |_|   \____/|_|  \_\/_/    \_\_____/*/ 
-//-------------------------------------------------------------------------
-//-------------------------------------------------------------------------
+/* _______ ________   _________ _    _ _____             _____
+ |__   __|  ____\ \ / /__   __| |  | |  __ \     /\    / ____|
+	| |  | |__   \ V /   | |  | |  | | |__) |   /  \  | (___
+	| |  |  __|   > <    | |  | |  | |  _  /   / /\ \  \___ \
+	| |  | |____ / . \   | |  | |__| | | \ \  / ____ \ ____) |
+	|_|  |______/_/ \_\  |_|   \____/|_|  \_\/_/    \_\_____/*/
+	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
 
 class Suelo : public Abs_Entity
 {
@@ -160,12 +160,21 @@ public:
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
-	
+
 	void setH(GLdouble h);
 
 private:
 	GLdouble grdY_, grdZ_;
 	GLdouble h_;
+};
+
+//-------------------------------------------------------------------------
+class Foto : public Abs_Entity
+{
+public:
+	explicit Foto(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~Foto();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
 #endif //_H_Entities_H_
