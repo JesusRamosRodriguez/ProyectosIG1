@@ -130,7 +130,7 @@ void Scene::scene3D()
 	//Caja* caja_ = newCaja(200.0);
 
 	// ----		Elementos de la escena CON Textura	 ----
-	CajaConTextura* cajaT_ = new CajaConTextura(200.0);
+	CajaConTextura* cajaT_ = new CajaConTextura(400.0);
 	Suelo* suelo_ = new Suelo(700, 450.0, 5, 5); //11. Suelo con textura
 	
 
@@ -151,6 +151,7 @@ void Scene::scene3D()
 	
 
 	//modificamos el atributo del objeto
+	estrella3D_->setTexure(gTextures[0]);
 	cajaT_->setTexure(gTextures[1]);
 	cajaT_->setIntTex(gTextures[2]);
 	suelo_->setTexure(gTextures[3]);
