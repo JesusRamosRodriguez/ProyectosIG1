@@ -350,6 +350,7 @@ void EstrellaConTextura::render(glm::dmat4 const& modelViewMat) const
 		mMesh->render();
 
 		mTexture->unbind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 

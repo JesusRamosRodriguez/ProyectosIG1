@@ -278,16 +278,17 @@ Mesh* Mesh::generaEstrellaTexCor(GLdouble re, GLuint np, GLdouble h)
     mesh->vTexCoords.emplace_back(0.5, 0.5); //abre con vO
     for (size_t i = 1; i <= np; i++)
     {
+
         //radio exterior
-        x = re * cos(radians(grados));
-        y = re * sin(radians(grados));
-        mesh->vTexCoords.emplace_back((x + 0.5), (y + 0.5));
+		x = re * cos(radians(grados));
+		y = re * sin(radians(grados));
+        mesh->vTexCoords.emplace_back(x, y);
         grados += incremento;
 
         //radio interior
-        xi = re / 2 * cos(radians(grados));
-        yi = re / 2 * sin(radians(grados));
-        mesh->vTexCoords.emplace_back((xi + 0.5), (yi + 0.5));
+		xi = re / 2 * cos(radians(grados));
+		yi = re / 2 * sin(radians(grados));
+        mesh->vTexCoords.emplace_back(xi, yi);
 
         grados += incremento;
     }
