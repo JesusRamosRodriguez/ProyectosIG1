@@ -124,13 +124,13 @@ void Scene::scene3D()
 
 	// Graphics objects (entities) of the scene
 	//----		Elementos de la escena SIN Textura	----
-	Estrella3D* estrella3D_ = new Estrella3D(80.0, 6.0, 100.0);	//6. Estrella 3D
+	EstrellaConTextura* estrella3D_ = new EstrellaConTextura(80.0, 6.0, 100.0);	//6. Estrella 3D
 	
 	GLdouble estrH_ = 200.0;  estrella3D_->setH(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
 	//Caja* caja_ = newCaja(200.0);
 
 	// ----		Elementos de la escena CON Textura	 ----
-	CajaConTextura* cajaT_ = new CajaConTextura(400.0);
+	CajaConTextura* cajaT_ = new CajaConTextura(200.0);
 	Suelo* suelo_ = new Suelo(700, 450.0, 5, 5); //11. Suelo con textura
 	
 

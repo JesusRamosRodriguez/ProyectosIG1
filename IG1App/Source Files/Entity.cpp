@@ -159,8 +159,7 @@ void RectanguloRGB::render(glm::dmat4 const& modelViewMat) const
 
 Estrella3D::Estrella3D(GLdouble re, GLdouble np, GLdouble h)
 {
-	//mMesh = Mesh::generaEstrella3D(re, np, h);
-	mMesh = Mesh::generaEstrellaTexCor(re, np, h);
+	mMesh = Mesh::generaEstrella3D(re, np, h);
 	grdY_ = grdZ_ = 0.0;
 }
 
@@ -319,5 +318,54 @@ void CajaConTextura::render(glm::dmat4 const& modelViewMat) const
 void CajaConTextura::setIntTex(Texture* t)
 {
 	iTexture_ = t;
+}
+//-------------------------------------------------------------------------
+
+EstrellaConTextura::EstrellaConTextura(GLdouble re, GLdouble np, GLdouble h)
+{
+	mMesh = Mesh::generaEstrellaTexCor(re, np, h);
+	grdY_ = grdZ_ = 0.0;
+}
+
+EstrellaConTextura::~EstrellaConTextura()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void EstrellaConTextura::render(glm::dmat4 const& modelViewMat) const
+{
+	
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+
+		mTexture->bind(GL_REPLACE);
+
+		mMesh->render();
+
+		//rotacion de la estrella sobre su eje
+		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
+		upload(aMat);
+
+		mMesh->render();
+
+		mTexture->unbind();
+	}
+}
+
+void EstrellaConTextura::update()
+{
+	//siempre se empieza la transformacion desde la matriz identidad, que es donde se aplica la operacion
+	mModelMat = translate(dmat4(1), dvec3(0, h_, 0));
+	//una vez actualizado mModelMat no hace falta más pasar por parametro la matriz identidad
+	mModelMat = rotate(mModelMat, radians(grdY_), dvec3(0, 1, 0));
+	mModelMat = rotate(mModelMat, radians(grdZ_), dvec3(0, 0, 1));
+	grdY_ += 1;
+	grdZ_ += 1;
+}
+
+void EstrellaConTextura::setH(GLdouble h)
+{
+	h_ = h;
 }
 //-------------------------------------------------------------------------

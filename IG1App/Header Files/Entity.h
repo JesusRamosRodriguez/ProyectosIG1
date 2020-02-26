@@ -151,7 +151,21 @@ private:
 	//segunda textura: interior caja
 	Texture* iTexture_;
 };
+//-------------------------------------------------------------------------
+class EstrellaConTextura : public Abs_Entity
+{
+public:
+	explicit EstrellaConTextura(GLdouble re, GLdouble np, GLdouble h);
+	~EstrellaConTextura();
 
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+	
+	void setH(GLdouble h);
 
+private:
+	GLdouble grdY_, grdZ_;
+	GLdouble h_;
+};
 
 #endif //_H_Entities_H_
