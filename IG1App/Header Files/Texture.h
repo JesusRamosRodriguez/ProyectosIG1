@@ -28,7 +28,7 @@ public:
   
   void setWrap(GLuint wp);  // GL_REPEAT, GL_CLAMP 
 
-  void loadColorBuffer();
+  void loadColorBuffer(GLint w, GLint h);
 
 protected:
 

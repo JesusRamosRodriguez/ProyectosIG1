@@ -324,6 +324,7 @@ EstrellaConTextura::EstrellaConTextura(GLdouble re, GLdouble np, GLdouble h)
 {
 	mMesh = Mesh::generaEstrellaTexCor(re, np, h);
 	grdY_ = grdZ_ = 0.0;
+	x_ = y_ = z_ = 0.0;
 }
 
 EstrellaConTextura::~EstrellaConTextura()
@@ -333,7 +334,6 @@ EstrellaConTextura::~EstrellaConTextura()
 
 void EstrellaConTextura::render(glm::dmat4 const& modelViewMat) const
 {
-
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
@@ -356,7 +356,7 @@ void EstrellaConTextura::render(glm::dmat4 const& modelViewMat) const
 void EstrellaConTextura::update()
 {
 	//siempre se empieza la transformacion desde la matriz identidad, que es donde se aplica la operacion
-	mModelMat = translate(dmat4(1), dvec3(0, h_, 0));
+	mModelMat = translate(dmat4(1), dvec3(x_, y_, z_));
 	//una vez actualizado mModelMat no hace falta más pasar por parametro la matriz identidad
 	mModelMat = rotate(mModelMat, radians(grdY_), dvec3(0, 1, 0));
 	mModelMat = rotate(mModelMat, radians(grdZ_), dvec3(0, 0, 1));
@@ -364,10 +364,9 @@ void EstrellaConTextura::update()
 	grdZ_ += 1;
 }
 
-void EstrellaConTextura::setH(GLdouble h)
-{
-	h_ = h;
-}
+void EstrellaConTextura::setY(GLdouble h){y_ = h;}
+void EstrellaConTextura::setX(GLdouble x){x_ = x;}
+void EstrellaConTextura::setZ(GLdouble z){z_ = z;}
 //-------------------------------------------------------------------------
 
 Foto::Foto(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
@@ -380,7 +379,7 @@ Foto::Foto(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 
 Foto::~Foto()
 {
-		delete mMesh; mMesh = nullptr;
+	delete mMesh; mMesh = nullptr;
 }
 
 void Foto::render(glm::dmat4 const& modelViewMat) const

@@ -126,13 +126,13 @@ void Scene::scene3D()
 	//----		Elementos de la escena SIN Textura	----
 	EstrellaConTextura* estrella3D_ = new EstrellaConTextura(80.0, 6.0, 100.0);	//6. Estrella 3D
 
-	GLdouble estrH_ = 200.0;  estrella3D_->setH(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
+	GLdouble estrH_ = 200.0;  estrella3D_->setY(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
 	//Caja* caja_ = newCaja(200.0);
 
 	// ----		Elementos de la escena CON Textura	 ----
-	CajaConTextura* cajaT_ = new CajaConTextura(200.0);
-	Suelo* suelo_ = new Suelo(700, 450.0, 5, 5); //11. Suelo con textura
-	Suelo* caja_fondo_ = new Suelo(200.0, 200.0, 1, 1);		 //13 fondo de la caja: parte opcional
+	CajaConTextura* cajaT_ = new CajaConTextura(180.0);
+	Suelo* suelo_ = new Suelo(900, 650.0, 5, 5); //11. Suelo con textura
+	Suelo* caja_fondo_ = new Suelo(180.0, 180.0, 1, 1);		 //13 fondo de la caja: parte opcional
 	Foto* foto_ = new Foto(200.0, 150.0, 1, 1); //15. foto con renderizado del buffer como textura
 
 
@@ -161,10 +161,15 @@ void Scene::scene3D()
 	foto_->setTexure(gTextures[0]);
 
 	//Transforms
-	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(0.0, estrH_, 0.0)));
-	suelo_->setModelMat(translate(suelo_->modelMat(), dvec3(0.0, 0.0, -100.0)));
-	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(0.0, 0.0, -98)));
-	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -98)));
+	//posicion en -x,-z  (estrella, caja, fondoCaja)
+	GLdouble x_ = -200.0, z_ = -200.0;
+	estrella3D_->setX(x_); estrella3D_->setZ(z_); //en Entity::EstrellaTextura.update() se actualizan posiciones. 
+
+	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(x_, estrH_, z_)));
+	suelo_->setModelMat(translate(suelo_->modelMat(), dvec3(0.0, 0.0, -91.0)));
+	cajaT_->setModelMat(translate(cajaT_->modelMat(), dvec3(x_, 0.0, z_)));
+	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(x_, -z_, -90))); //z en y porque está rotado pivote en su propio eje
+	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -90)));
 
 
 	//Entities

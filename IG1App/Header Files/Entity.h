@@ -161,11 +161,13 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
 
-	void setH(GLdouble h);
+	void setY(GLdouble y);
+	void setX(GLdouble x);
+	void setZ(GLdouble z);
 
 private:
 	GLdouble grdY_, grdZ_;
-	GLdouble h_;
+	GLdouble y_, x_, z_;
 };
 
 //-------------------------------------------------------------------------
