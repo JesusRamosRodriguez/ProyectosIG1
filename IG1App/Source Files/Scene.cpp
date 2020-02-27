@@ -84,7 +84,7 @@ void Scene::setState(int id)
 		init();
 	}
 }
-	
+
 //-------------------------------------------------------------------------
 void Scene::scene2D()
 {
@@ -125,7 +125,7 @@ void Scene::scene3D()
 	// Graphics objects (entities) of the scene
 	//----		Elementos de la escena SIN Textura	----
 	EstrellaConTextura* estrella3D_ = new EstrellaConTextura(80.0, 6.0, 100.0);	//6. Estrella 3D
-	
+
 	GLdouble estrH_ = 200.0;  estrella3D_->setH(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
 	//Caja* caja_ = newCaja(200.0);
 
@@ -134,7 +134,7 @@ void Scene::scene3D()
 	Suelo* suelo_ = new Suelo(700, 450.0, 5, 5); //11. Suelo con textura
 	Suelo* caja_fondo_ = new Suelo(200.0, 200.0, 1, 1);		 //13 fondo de la caja: parte opcional
 	Foto* foto_ = new Foto(200.0, 150.0, 1, 1); //15. foto con renderizado del buffer como textura
-	
+
 
 	//Colores
 	//(..........)
@@ -150,7 +150,7 @@ void Scene::scene3D()
 	gTextures[2]->load("../Bmps/papelE.bmp"); //2
 	gTextures.push_back(new Texture());//3
 	gTextures[3]->load("../Bmps/baldosaC.bmp"); //3
-	
+
 
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
@@ -159,7 +159,7 @@ void Scene::scene3D()
 	suelo_->setTexure(gTextures[3]);
 	caja_fondo_->setTexure(gTextures[1]);
 	foto_->setTexure(gTextures[0]);
-	
+
 	//Transforms
 	estrella3D_->setModelMat(translate(estrella3D_->modelMat(), dvec3(0.0, estrH_, 0.0)));
 	suelo_->setModelMat(translate(suelo_->modelMat(), dvec3(0.0, 0.0, -100.0)));
