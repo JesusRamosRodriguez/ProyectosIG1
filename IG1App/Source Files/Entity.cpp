@@ -2,6 +2,7 @@
 
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
+#include "IG1App.h"
 
 using namespace glm;
 
@@ -395,4 +396,9 @@ void Foto::render(glm::dmat4 const& modelViewMat) const
 		mTexture->unbind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
+}
+
+void Foto::update()
+{
+	mTexture->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight());
 }

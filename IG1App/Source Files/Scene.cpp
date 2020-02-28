@@ -3,6 +3,8 @@
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
 
+#include "IG1App.h"
+
 using namespace glm;
 //-------------------------------------------------------------------------
 
@@ -150,15 +152,17 @@ void Scene::scene3D()
 	gTextures[2]->load("../Bmps/papelE.bmp"); //2
 	gTextures.push_back(new Texture());//3
 	gTextures[3]->load("../Bmps/baldosaC.bmp"); //3
-
+	gTextures.push_back(new Texture());
+	gTextures[4]->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight());
 
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
 	cajaT_->setTexure(gTextures[1]);
 	cajaT_->setIntTex(gTextures[2]);
 	suelo_->setTexure(gTextures[3]);
-	caja_fondo_->setTexure(gTextures[1]);
-	foto_->setTexure(gTextures[0]);
+	caja_fondo_->setTexure(gTextures[2]);
+
+	foto_->setTexure(gTextures[4]);
 
 	//Transforms
 	//posicion en -x,-z  (estrella, caja, fondoCaja)
@@ -171,7 +175,7 @@ void Scene::scene3D()
 	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(x_, -z_, -90))); //z en y porque está rotado pivote en su propio eje
 	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -90)));
 
-
+	
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
 	gObjects.push_back(estrella3D_);

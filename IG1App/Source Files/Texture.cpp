@@ -71,7 +71,7 @@ void Texture::loadColorBuffer(GLint w, GLint h)
 	glBindTexture(GL_TEXTURE_2D, mId);
 	glReadBuffer(GL_FRONT);
 	glCopyTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, 0, 0, w, h, border);
-
+    glReadBuffer(GL_BACK);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 //-------------------------------------------------------------------------
