@@ -3,6 +3,8 @@
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
 
+#include "IG1App.h"
+
 using namespace glm;
 //-------------------------------------------------------------------------
 
@@ -124,17 +126,21 @@ void Scene::scene3D()
 
 	// Graphics objects (entities) of the scene
 	//----		Elementos de la escena SIN Textura	----
-	EstrellaConTextura* estrella3D_ = new EstrellaConTextura(80.0, 6.0, 100.0);	//6. Estrella 3D
-
-	GLdouble estrH_ = 200.0;  estrella3D_->setY(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
-	//Caja* caja_ = newCaja(200.0);
+	//(...)
 
 	// ----		Elementos de la escena CON Textura	 ----
+	EstrellaConTextura* estrella3D_ = new EstrellaConTextura(80.0, 6.0, 100.0);	//6. Estrella 3D
+	GLdouble estrH_ = 200.0;  estrella3D_->setY(estrH_);//será la altura de la estrella, se actualiza en su update para la animacion
+	
 	CajaConTextura* cajaT_ = new CajaConTextura(180.0);
-	Suelo* suelo_ = new Suelo(900, 650.0, 5, 5); //11. Suelo con textura
+
+	Suelo* suelo_ = new Suelo(900.0, 900.0, 5, 5); //11. Suelo con textura
 	Suelo* caja_fondo_ = new Suelo(180.0, 180.0, 1, 1);		 //13 fondo de la caja: parte opcional
+
 	Foto* foto_ = new Foto(200.0, 150.0, 1, 1); //15. foto con renderizado del buffer como textura
 
+	// ----		Elementos de la escena CON BLENDING	 ----
+	CajaConTextura* cristaleraTransLucida_ = new CajaConTextura(900.0);
 
 	//Colores
 	//(..........)
@@ -150,15 +156,19 @@ void Scene::scene3D()
 	gTextures[2]->load("../Bmps/papelE.bmp"); //2
 	gTextures.push_back(new Texture());//3
 	gTextures[3]->load("../Bmps/baldosaC.bmp"); //3
-
+	gTextures.push_back(new Texture());
+	gTextures[4]->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight());
 
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
-	cajaT_->setTexure(gTextures[1]);
+
+	cajaT_->setTexure(gTextures[1]); //la caja tiene dos texturas. 
 	cajaT_->setIntTex(gTextures[2]);
 	suelo_->setTexure(gTextures[3]);
-	caja_fondo_->setTexure(gTextures[1]);
-	foto_->setTexure(gTextures[0]);
+	caja_fondo_->setTexure(gTextures[2]);
+	foto_->setTexure(gTextures[4]);
+	cristaleraTransLucida_->setTexure(gTextures[2]);
+	cristaleraTransLucida_->setIntTex(gTextures[2]);
 
 	//Transforms
 	//posicion en -x,-z  (estrella, caja, fondoCaja)
@@ -171,7 +181,7 @@ void Scene::scene3D()
 	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(x_, -z_, -90))); //z en y porque está rotado pivote en su propio eje
 	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -90)));
 
-
+	
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
 	gObjects.push_back(estrella3D_);
@@ -179,5 +189,6 @@ void Scene::scene3D()
 	gObjects.push_back(suelo_);
 	gObjects.push_back(caja_fondo_);
 	gObjects.push_back(foto_);
+	gObjects.push_back(cristaleraTransLucida_);
 }
 //-------------------------------------------------------------------------
