@@ -402,3 +402,53 @@ void Foto::update()
 {
 	mTexture->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight());
 }
+
+
+
+//-------------------------------------------------------------------------
+Cristalera::Cristalera(GLdouble ld)
+{
+	mMesh = Mesh::generaCuboTexCor(ld);
+}
+
+Cristalera::~Cristalera()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void Cristalera::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+
+		
+
+		mTexture->bind(GL_REPLACE);
+		//glEnable(GL_CULL_FACE);
+		//glCullFace(GL_BACK);
+
+		glDepthMask(GL_FALSE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		/*glEnable(GL_ALPHA_TEST);
+		glAlphaFunc(GL_GREATER, 0.8);*/
+		
+
+		mMesh->render();
+
+		/*glCullFace(GL_FRONT);
+		mMesh->render();*/
+
+		//glDisable(GL_ALPHA_TEST);
+		glDisable(GL_BLEND);
+		glDepthMask(GL_TRUE);
+		//glDisable(GL_CULL_FACE);
+		mTexture->unbind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	}
+}
+
+
