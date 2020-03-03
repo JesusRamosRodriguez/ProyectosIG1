@@ -180,6 +180,25 @@ public:
 	virtual void update();
 };
 
+// ____   _        ___  ____   ___    ____  ____    ____ 
+//|    \ | |      /  _]|    \ |   \  |    ||    \  /    |
+//|  o  )| |     /  [_ |  _  ||    \  |  | |  _  ||   __|
+//|     || |___ |    _]|  |  ||  D  | |  | |  |  ||  |  |
+//|  O  ||     ||   [_ |  |  ||     | |  | |  |  ||  |_ |
+//|     ||     ||     ||  |  ||     | |  | |  |  ||     |
+//|_____||_____||_____||__|__||_____||____||__|__||___,_|
+                                                       
+class Cristalera : public Abs_Entity
+{
+public:
+	explicit Cristalera(GLdouble ld);
+	~Cristalera();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	
+};
+
+
+//-------------------------------------------------------------------------
 
 
 

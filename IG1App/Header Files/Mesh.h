@@ -29,6 +29,8 @@ public:
 	static Mesh* generaCuboTexCor(GLdouble nl); //14. caja con textura
 
 
+
+
 	Mesh() {};
 	virtual ~Mesh() {};
 

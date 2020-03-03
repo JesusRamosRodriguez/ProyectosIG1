@@ -140,7 +140,7 @@ void Scene::scene3D()
 	Foto* foto_ = new Foto(200.0, 150.0, 1, 1); //15. foto con renderizado del buffer como textura
 
 	// ----		Elementos de la escena CON BLENDING	 ----
-	CajaConTextura* cristaleraTransLucida_ = new CajaConTextura(900.0);
+	Cristalera* cristalera_ = new Cristalera(900.0);
 
 	//Colores
 	//(..........)
@@ -150,14 +150,21 @@ void Scene::scene3D()
 	// Textures ***	0: triangulo --- 1: caja (exterior), 2: caja (interior) --- 3: suelo adoquinado; 
 	gTextures.push_back(new Texture()); //0
 	gTextures[0]->load("../Bmps/baldosaP.bmp"); //0
+
 	gTextures.push_back(new Texture()); //1
 	gTextures[1]->load("../Bmps/container.bmp"); //1
+
 	gTextures.push_back(new Texture());//2
 	gTextures[2]->load("../Bmps/papelE.bmp"); //2
+
 	gTextures.push_back(new Texture());//3
 	gTextures[3]->load("../Bmps/baldosaC.bmp"); //3
+
 	gTextures.push_back(new Texture());
-	gTextures[4]->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight());
+	gTextures[4]->loadColorBuffer(IG1App::s_ig1app.getWinWidth(), IG1App::s_ig1app.getWinHeight()); 
+
+	gTextures.push_back(new Texture()); //5
+	gTextures[5]->load("../Bmps/windowV.bmp", 180); //5 textura translucida
 
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
@@ -167,8 +174,7 @@ void Scene::scene3D()
 	suelo_->setTexure(gTextures[3]);
 	caja_fondo_->setTexure(gTextures[2]);
 	foto_->setTexure(gTextures[4]);
-	cristaleraTransLucida_->setTexure(gTextures[2]);
-	cristaleraTransLucida_->setIntTex(gTextures[2]);
+	cristalera_->setTexure(gTextures[5]);
 
 	//Transforms
 	//posicion en -x,-z  (estrella, caja, fondoCaja)
@@ -181,6 +187,10 @@ void Scene::scene3D()
 	caja_fondo_->setModelMat(translate(caja_fondo_->modelMat(), dvec3(x_, -z_, -90))); //z en y porque está rotado pivote en su propio eje
 	foto_->setModelMat(translate(foto_->modelMat(), dvec3(200, 0.0, -90)));
 
+	cristalera_->setModelMat(translate(cristalera_->modelMat(), dvec3(0.0, 120.0, 0.0)));
+	cristalera_->setModelMat(scale(cristalera_->modelMat(), dvec3(1, 0.5, 1)));
+
+
 	
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
@@ -189,6 +199,6 @@ void Scene::scene3D()
 	gObjects.push_back(suelo_);
 	gObjects.push_back(caja_fondo_);
 	gObjects.push_back(foto_);
-	gObjects.push_back(cristaleraTransLucida_);
+	gObjects.push_back(cristalera_);
 }
 //-------------------------------------------------------------------------
