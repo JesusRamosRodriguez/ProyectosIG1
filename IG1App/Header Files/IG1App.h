@@ -55,12 +55,19 @@ protected:
 	void specialKey(int key, int x, int y);     // keypress event for special characters
 	void update();	//P0. 9. Animación opcional 
 
+	//*******P1.2
+	void mouse(int button, int state, int x, int y); 
+	void motion(int x, int y);
+
 	// static callbacks 
 	static void s_display() { s_ig1app.display(); };
 	static void s_resize(int newWidth, int newHeight) { s_ig1app.resize(newWidth, newHeight); };
 	static void s_key(unsigned char key, int x, int y) { s_ig1app.key(key, x, y); };
 	static void s_specialKey(int key, int x, int y) { s_ig1app.specialKey(key, x, y); };
-	static void s_update() { s_ig1app.update(); };
+	static void s_update() { s_ig1app.update(); }; //*******P1.1
+	//*******P1.2
+	static void s_mouse(int button, int state, int x, int y) { s_ig1app.mouse(button,state, x, y); }; 
+	static void s_motion(int x, int y) { s_ig1app.motion(x, y); }; //FALTA DEFINIR EL MÉTODO en .cpp
 
 
 	// Viewport position and size
@@ -79,6 +86,10 @@ protected:
 	bool anim_;
 	
 	void setBoolAnimation();
+
+	//P1.2 
+	int mMouseButt;
+	glm::dvec2 mMouseCoord;
 };
 //-------------------------------------------------------------------------
 

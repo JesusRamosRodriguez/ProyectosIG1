@@ -7,6 +7,8 @@
 
 #include "Viewport.h"
 
+#include <gtc/matrix_access.hpp>
+
 //-------------------------------------------------------------------------
 
 class Camera {
@@ -23,9 +25,15 @@ public:
 	void set2D();
 	void set3D();
 	
-	void pitch(GLdouble a); // rotates a degrees on the X axis
-	void yaw(GLdouble a);   // rotates a degrees on the Y axis
-	void roll(GLdouble a);  // rotates a degrees on the Z axis
+	//void pitch(GLdouble a); // rotates a degrees on the X axis
+	//void yaw(GLdouble a);   // rotates a degrees on the Y axis
+	//void roll(GLdouble a);  // rotates a degrees on the Z axis
+
+	//P1.2 *************
+	void moveLR(GLdouble cs); // Left / Right
+	void moveFB(GLdouble cs); // Forward / Backward
+	void moveUD(GLdouble cs); // Up / Down	
+	void orbit(GLdouble incAng, GLdouble incY);
 
 	// projection matrix
 	glm::dmat4 const& projMat() const { return mProjMat; };
@@ -57,8 +65,14 @@ protected:
 
 	Viewport* mViewPort;   // the viewport
 
+	
+
 	void setVM();
 	void setPM();
+
+	//P1.2 *************
+	glm::dvec3 mRight, mUpward, mFront;
+	void setAxes();
 };
 //-------------------------------------------------------------------------
 

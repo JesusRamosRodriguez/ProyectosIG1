@@ -26,6 +26,9 @@ void Camera::uploadVM() const
 void Camera::setVM() 
 {
 	mViewMat = lookAt(mEye, mLook, mUp);  // glm::lookAt defines the view matrix 
+	//P1.2
+	//implementamos el método setAxes
+	setAxes();
 }
 //-------------------------------------------------------------------------
 
@@ -47,25 +50,26 @@ void Camera::set3D()
 }
 //-------------------------------------------------------------------------
 
-void Camera::pitch(GLdouble a) 
-{  
-	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(1.0, 0, 0));
-	// glm::rotate returns mViewMat * rotationMatrix
-}
-//-------------------------------------------------------------------------
-
-void Camera::yaw(GLdouble a) 
-{
-	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(0, 1.0, 0));
-	// glm::rotate returns mViewMat * rotationMatrix
-}
-//-------------------------------------------------------------------------
-
-void Camera::roll(GLdouble a) 
-{
-	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(0, 0, 1.0));
-	// glm::rotate returns mViewMat * rotationMatrix
-}
+//SE COMENTAN POR INDICACIÓN DEL ENUNCIADO DE LA PRACTICA
+//void Camera::pitch(GLdouble a) 
+//{  
+//	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(1.0, 0, 0));
+//	// glm::rotate returns mViewMat * rotationMatrix
+//}
+////-------------------------------------------------------------------------
+//
+//void Camera::yaw(GLdouble a) 
+//{
+//	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(0, 1.0, 0));
+//	// glm::rotate returns mViewMat * rotationMatrix
+//}
+////-------------------------------------------------------------------------
+//
+//void Camera::roll(GLdouble a) 
+//{
+//	mViewMat = rotate(mViewMat, glm::radians(a), glm::dvec3(0, 0, 1.0));
+//	// glm::rotate returns mViewMat * rotationMatrix
+//}
 //-------------------------------------------------------------------------
 
 void Camera::setSize(GLdouble xw, GLdouble yh) 
@@ -93,6 +97,7 @@ void Camera::setPM()
 		// glm::ortho defines the orthogonal projection matrix
 	}
 }
+
 //-------------------------------------------------------------------------
 
 void Camera::uploadPM() const 
@@ -102,5 +107,40 @@ void Camera::uploadPM() const
 	glMatrixMode(GL_MODELVIEW);
 }
 //-------------------------------------------------------------------------
+ // _____  _____            _____ _______ _____ _____            __   ___  
+ //|  __ \|  __ \     /\   / ____|__   __|_   _/ ____|   /\     /_ | |__ \ 
+ //| |__) | |__) |   /  \ | |       | |    | || |       /  \     | |    ) |
+ //|  ___/|  _  /   / /\ \| |       | |    | || |      / /\ \    | |   / / 
+ //| |    | | \ \  / ____ \ |____   | |   _| || |____ / ____ \   | |_ / /_ 
+ //|_|    |_|  \_\/_/    \_\_____|  |_|  |_____\_____/_/    \_\  |_(_)____
+void Camera::moveLR(GLdouble cs)
+{
+	mEye += mRight * cs;
+	mLook += mRight * cs;
+	setVM();
+}
+void Camera::moveFB(GLdouble cs)
+{
+	mEye += mFront * cs;
+	mLook += mFront * cs;
+	setVM();
+}
+void Camera::moveUD(GLdouble cs)
+{
+	mEye += mUpward * cs;
+	mLook += mUpward * cs; 
+	setVM();
+}
+void Camera::orbit(GLdouble incAng, GLdouble incY)
+{
+}
 
 
+//SE INCLUYE EN EL MÉTODO setVM
+void Camera::setAxes()
+{
+	mRight = row(mViewMat, 0);
+	mUpward = row(mViewMat, 1);
+	mFront = -row(mViewMat, 2);
+}
+//-------------------------------------------------------------------------
