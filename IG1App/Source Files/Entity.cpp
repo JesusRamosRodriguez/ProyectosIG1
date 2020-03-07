@@ -423,32 +423,55 @@ void Cristalera::render(glm::dmat4 const& modelViewMat) const
 		upload(aMat);
 
 		
-
 		mTexture->bind(GL_REPLACE);
-		//glEnable(GL_CULL_FACE);
-		//glCullFace(GL_BACK);
 
+		glDisable(GL_ALPHA_TEST);
 		glDepthMask(GL_FALSE);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		/*glEnable(GL_ALPHA_TEST);
-		glAlphaFunc(GL_GREATER, 0.8);*/
-		
-
 		mMesh->render();
 
-		/*glCullFace(GL_FRONT);
-		mMesh->render();*/
-
-		//glDisable(GL_ALPHA_TEST);
 		glDisable(GL_BLEND);
 		glDepthMask(GL_TRUE);
-		//glDisable(GL_CULL_FACE);
+		glEnable(GL_ALPHA_TEST);
 		mTexture->unbind();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	}
 }
 
+Planta::Planta(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
+{
+	mMesh = Mesh::generaRectanguloTexCor(w, h, rw, rh);
 
+	//establecer la matriz de modelado en plano horizontal
+	mModelMat = rotate(dmat4(1), radians(-90.0), dvec3(1, 0, 0));
+}
+
+Planta::~Planta()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void Planta::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+
+
+		mTexture->bind(GL_REPLACE);
+	
+		glDepthMask(GL_FALSE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		mMesh->render();
+
+		glDisable(GL_BLEND);
+		glDepthMask(GL_TRUE);
+		mTexture->unbind();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+}

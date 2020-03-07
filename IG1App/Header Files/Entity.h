@@ -200,6 +200,13 @@ public:
 
 //-------------------------------------------------------------------------
 
+class Planta : public Abs_Entity
+{
+public:
+	explicit Planta(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
+	~Planta();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
 
+};
 
 #endif //_H_Entities_H_

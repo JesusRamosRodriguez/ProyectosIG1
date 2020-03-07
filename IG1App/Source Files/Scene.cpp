@@ -142,6 +142,9 @@ void Scene::scene3D()
 	// ----		Elementos de la escena CON BLENDING	 ----
 	Cristalera* cristalera_ = new Cristalera(900.0);
 
+	Planta* planta1_ = new Planta(150.0, 150.0, 1, 1);
+	Planta* planta2_ = new Planta(150.0, 150.0, 1, 1);
+
 	//Colores
 	//(..........)
 
@@ -166,6 +169,9 @@ void Scene::scene3D()
 	gTextures.push_back(new Texture()); //5
 	gTextures[5]->load("../Bmps/windowV.bmp", 180); //5 textura translucida
 
+	gTextures.push_back(new Texture()); //6
+	gTextures[6]->load("../Bmps/grass.bmp", {0,0,0}, 0); //18. planta
+
 	//modificamos el atributo del objeto
 	estrella3D_->setTexure(gTextures[0]);
 
@@ -175,6 +181,9 @@ void Scene::scene3D()
 	caja_fondo_->setTexure(gTextures[2]);
 	foto_->setTexure(gTextures[4]);
 	cristalera_->setTexure(gTextures[5]);
+
+	planta1_->setTexure(gTextures[6]);
+	planta2_->setTexure(gTextures[6]);
 
 	//Transforms
 	//posicion en -x,-z  (estrella, caja, fondoCaja)
@@ -190,15 +199,30 @@ void Scene::scene3D()
 	cristalera_->setModelMat(translate(cristalera_->modelMat(), dvec3(0.0, 120.0, 0.0)));
 	cristalera_->setModelMat(scale(cristalera_->modelMat(), dvec3(1, 0.5, 1)));
 
+	planta1_->setModelMat(rotate(planta1_->modelMat(), radians(90.0), dvec3(1, 0, 0)));
+	planta1_->setModelMat(translate(planta1_->modelMat(), dvec3(325.0, -22.0, -125.0)));
+
+	planta2_->setModelMat(rotate(planta2_->modelMat(), radians(90.0), dvec3(1, 0, 0)));
+	planta2_->setModelMat(translate(planta2_->modelMat(), dvec3(325.0, -22.0, -125.0)));
+	planta2_->setModelMat(rotate(planta2_->modelMat(), radians(90.0), dvec3(0, 1, 0)));
+	
+
+	
 
 	
 	//Entities
 	gObjects.push_back(new EjesRGB(400.0));
+	
+	//opacos
 	gObjects.push_back(estrella3D_);
 	gObjects.push_back(cajaT_);
 	gObjects.push_back(suelo_);
 	gObjects.push_back(caja_fondo_);
 	gObjects.push_back(foto_);
+	gObjects.push_back(planta1_);
+	gObjects.push_back(planta2_);
+	//traslucidos
 	gObjects.push_back(cristalera_);
+	
 }
 //-------------------------------------------------------------------------
