@@ -73,6 +73,8 @@ protected:
 	//P1.2 *************
 	glm::dvec3 mRight, mUpward, mFront;
 	void setAxes();
+
+	GLdouble mAng, mRad;
 };
 //-------------------------------------------------------------------------
 

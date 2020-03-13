@@ -65,9 +65,9 @@ void IG1App::motion(int x, int y)
 	else if (mMouseButt == GLUT_LEFT_BUTTON) {
 		glm::dvec2 mp = mMouseCoord;
 		mMouseCoord = glm::dvec2(x, mWinH - y);
-		mp -= mMouseCoord - mp;
+		mp -= mMouseCoord;
 		
-		//mCamera.orbit(mp.x * 0.05, mp.y); // sensitivity = 0.05 //　　HAY QUE DEFINIRLO EN LA CLASE CAMERA
+		mCamera->orbit((mp.x * 0.05), mp.y); // sensitivity = 0.05 //　　HAY QUE DEFINIRLO EN LA CLASE CAMERA
 		glutPostRedisplay();
 	}
 	
